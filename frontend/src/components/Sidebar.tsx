@@ -10,7 +10,8 @@ import {
   Cpu, 
   FileText,
   Database,
-  Activity
+  Activity,
+  Upload
 } from "lucide-react";
 import { useState } from "react";
 
