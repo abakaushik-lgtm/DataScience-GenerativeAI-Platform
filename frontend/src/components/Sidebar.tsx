@@ -11,7 +11,8 @@ import {
   FileText,
   Database,
   Activity,
-  Upload
+  Upload,
+  Settings
 } from "lucide-react";
 import { useState } from "react";
 
@@ -38,6 +39,7 @@ export default function Sidebar() {
     { name: "AutoML Engine", href: "/dashboard#automl", icon: <Cpu size={18} /> },
     { name: "Advanced ML Studio", href: "/advanced-ml", icon: <Activity size={18} /> },
     { name: "AI Reports", href: "/dashboard#reports", icon: <FileText size={18} /> },
+    { name: "Settings", href: "/settings", icon: <Settings size={18} /> },
   ];
 
   return (
