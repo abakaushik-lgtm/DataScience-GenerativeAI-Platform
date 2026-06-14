@@ -194,7 +194,7 @@ export default function Home() {
 
               {/* Hero Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-4 w-full">
-                <div className="bg-[#13141c] p-6 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-[#ffffff2a] transition-all duration-300 cursor-default relative overflow-hidden group shadow-lg">
+                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
                   <div className="absolute inset-0 bg-gradient-to-b from-[#3b82f6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="p-3 bg-[#3b82f6]/10 rounded-xl text-[#3b82f6] mb-3 relative z-10"><Database size={24} /></div>
                   <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">12</div>
@@ -204,7 +204,7 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="bg-[#13141c] p-6 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-[#ffffff2a] transition-all duration-300 cursor-default relative overflow-hidden group shadow-lg">
+                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
                   <div className="absolute inset-0 bg-gradient-to-b from-[#10b981]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="p-3 bg-[#10b981]/10 rounded-xl text-[#10b981] mb-3 relative z-10"><FileText size={24} /></div>
                   <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">84</div>
@@ -214,7 +214,7 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="bg-[#13141c] p-6 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-[#ffffff2a] transition-all duration-300 cursor-default relative overflow-hidden group shadow-lg">
+                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
                   <div className="absolute inset-0 bg-gradient-to-b from-[#8b5cf6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="p-3 bg-[#8b5cf6]/10 rounded-xl text-[#8b5cf6] mb-3 relative z-10"><Cpu size={24} /></div>
                   <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">17</div>
@@ -224,7 +224,7 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="bg-[#13141c] p-6 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-[#ffffff2a] transition-all duration-300 cursor-default relative overflow-hidden group shadow-lg">
+                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
                   <div className="absolute inset-0 bg-gradient-to-b from-[#f59e0b]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="p-3 bg-[#f59e0b]/10 rounded-xl text-[#f59e0b] mb-3 relative z-10"><BookOpen size={24} /></div>
                   <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">320</div>
@@ -236,9 +236,9 @@ export default function Home() {
               </div>
 
               {/* Sample Prompts & Recent */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-[#13141c] p-6 rounded-xl border border-[#ffffff14] hover:shadow-lg transition-all">
-                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-8 rounded-3xl shadow-xl ring-1 ring-white/5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all">
+                  <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
                     <Send size={18} className="text-[#3b82f6]" /> Suggested Actions
                   </h3>
                   <div className="flex flex-wrap gap-3">
@@ -251,7 +251,7 @@ export default function Home() {
                       <button 
                         key={i} 
                         onClick={() => handleSendMessage(item.query)}
-                        className="px-4 py-2 rounded-full bg-[#1c1d29] border border-[#ffffff14] hover:border-[#3b82f6] hover:bg-[#3b82f6]/10 transition-all text-sm font-medium text-[#9ea3b0] hover:text-[#3b82f6]"
+                        className="px-5 py-2.5 rounded-full bg-[#0a0a0f] ring-1 ring-[#ffffff14] hover:ring-[#3b82f6] hover:bg-[#3b82f6]/10 transition-all text-sm font-medium text-[#9ea3b0] hover:text-[#3b82f6] shadow-sm"
                       >
                         {item.label}
                       </button>
@@ -259,7 +259,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="bg-[#13141c] p-6 rounded-xl border border-[#ffffff14] hover:shadow-lg transition-all">
+                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-8 rounded-3xl shadow-xl ring-1 ring-white/5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all">
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                     <Activity size={18} className="text-[#10b981]" /> Active Datasets
                   </h3>
