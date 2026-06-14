@@ -31,10 +31,9 @@ export default function InsightsDashboard() {
     // Fetch insights from our FastAPI backend
     const fetchInsights = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
-        const response = await fetch(`${apiUrl}/api/insights/generate`, {
+        const response = await fetch("http://localhost:8000/api/insights/generate", {
           method: "POST",
-          headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ db_type: "mock" })
         });
         const data = await response.json();
@@ -52,10 +51,9 @@ export default function InsightsDashboard() {
   const handleRunForecast = async () => {
     setLoadingForecast(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
-      const response = await fetch(`${apiUrl}/api/forecasting/predict`, {
+      const response = await fetch("http://localhost:8000/api/forecasting/predict", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           db_type: "mock",
           time_col: "date",
@@ -76,10 +74,9 @@ export default function InsightsDashboard() {
   const handleRunAutoML = async () => {
     setLoadingAutoML(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
-      const response = await fetch(`${apiUrl}/api/automl/train`, {
+      const response = await fetch("http://localhost:8000/api/automl/train", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           db_type: "mock",
           task_type: taskType,
@@ -104,10 +101,9 @@ export default function InsightsDashboard() {
         automl: autoMLData
       };
       
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
-      const response = await fetch(`${apiUrl}/api/advanced-reports/generate`, {
+      const response = await fetch("http://localhost:8000/api/advanced-reports/generate", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           data_payload: payload,
           report_type: reportType,

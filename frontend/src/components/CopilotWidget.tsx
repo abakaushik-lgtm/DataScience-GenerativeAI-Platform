@@ -29,10 +29,9 @@ export default function CopilotWidget() {
       // In a real app, you would pass the current Redux/Context state here (e.g. chartData)
       const contextData = { current_view: window.location.pathname };
       
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
-      const response = await fetch(`${apiUrl}/api/copilot/query`, {
+      const response = await fetch("http://localhost:8000/api/copilot/query", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: userMsg.content, context_data: contextData })
       });
       
