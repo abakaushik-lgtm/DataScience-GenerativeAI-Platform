@@ -38,6 +38,7 @@ export default function Sidebar() {
     { name: "Forecasting", href: "/dashboard#forecasting", icon: <TrendingUp size={18} /> },
     { name: "AutoML Engine", href: "/dashboard#automl", icon: <Cpu size={18} /> },
     { name: "Advanced ML Studio", href: "/advanced-ml", icon: <Activity size={18} /> },
+    { name: "Data Explorer Hub", href: "/data-explorer", icon: <Database size={18} /> },
     { name: "AI Reports", href: "/dashboard#reports", icon: <FileText size={18} /> },
     { name: "Settings", href: "/settings", icon: <Settings size={18} /> },
   ];

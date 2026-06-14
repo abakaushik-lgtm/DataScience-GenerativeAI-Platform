@@ -10,6 +10,7 @@ export default function Header() {
     if (pathname === "/") return "AI Analyst";
     if (pathname === "/dashboard") return "Executive Dashboard";
     if (pathname === "/advanced-ml") return "Advanced ML Studio";
+    if (pathname === "/data-explorer") return "Data Explorer Hub";
     if (pathname === "/settings") return "Settings";
     return "AI Data Platform";
   };
