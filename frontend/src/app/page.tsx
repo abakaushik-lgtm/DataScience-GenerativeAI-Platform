@@ -17,7 +17,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi! I'm your AntiGravity Data Analyst. You can ask me to query your structured databases, or upload PDFs to my Knowledge Base and ask me questions about your unstructured documents!",
+      content: "Welcome to AntiGravity\n\nAsk questions about:\n• Databases\n• CSV files\n• PDFs\n• Business metrics\n\nExamples:\n\"Why did sales drop last month?\"\n\"Forecast revenue for Q3\"\n\"Summarize uploaded documents\"",
     },
   ]);
   const [query, setQuery] = useState("");
@@ -138,7 +138,7 @@ export default function Home() {
                     : "glass-panel"
                 }`}
               >
-                <div className="font-medium text-[15px] leading-relaxed">{msg.content}</div>
+                <div className="font-medium text-[15px] leading-relaxed whitespace-pre-wrap">{msg.content}</div>
                 
                 {msg.sql && (
                   <div className="mt-4 bg-[#0a0a0f] p-3 rounded-md border border-[#ffffff14]">
