@@ -161,6 +161,9 @@ export default function InsightsDashboard() {
           }
         }
       }
+    ]
+  };
+
   // Dynamic Chart for Forecast
   const getForecastChart = () => {
     if (!forecastData) return {};
