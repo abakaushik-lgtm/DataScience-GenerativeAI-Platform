@@ -244,7 +244,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
                     <Send size={18} className="text-[#3b82f6]" /> Suggested Actions
                   </h3>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-4 mt-2">
                     {[
                       { label: "Revenue Analysis", query: "Why did revenue decrease last quarter?" },
                       { label: "Forecast Q3", query: "Forecast next quarter sales based on seasonality" },
@@ -254,7 +254,7 @@ export default function Home() {
                       <button 
                         key={i} 
                         onClick={() => handleSendMessage(item.query)}
-                        className="px-5 py-2.5 rounded-full bg-[#0a0a0f] ring-1 ring-[#ffffff14] hover:ring-[#3b82f6] hover:bg-[#3b82f6]/10 transition-all text-sm font-medium text-[#9ea3b0] hover:text-[#3b82f6] shadow-sm"
+                        className="px-6 py-3 rounded-full bg-[#13141c] border border-[#ffffff2a] hover:border-[#3b82f6]/60 hover:bg-[#3b82f6]/10 transition-all duration-300 text-sm font-semibold text-[#e2e8f0] hover:text-[#3b82f6] shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.25)] flex items-center gap-2 hover:-translate-y-0.5"
                       >
                         {item.label}
                       </button>
