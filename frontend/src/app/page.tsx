@@ -165,17 +165,17 @@ export default function Home() {
         {/* Chat History */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           {/* Chat Mode Toggle */}
-          <div className="flex justify-center mb-6">
-            <div className="bg-[#1c1d29] p-1 rounded-lg inline-flex border border-[#ffffff14]">
+          <div className="flex justify-center mb-8">
+            <div className="bg-[#13141c] p-1.5 rounded-xl inline-flex border border-[#ffffff14] shadow-inner w-full max-w-md">
               <button 
                 onClick={() => setChatMode("SQL")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${chatMode === "SQL" ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-[#9ea3b0] hover:text-white'}`}
+                className={`flex-1 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${chatMode === "SQL" ? 'bg-[#3b82f6] text-white shadow-md transform scale-[1.02]' : 'text-[#9ea3b0] hover:text-[#f0f0f5] hover:bg-[#1c1d29]'}`}
               >
                 SQL Analyst
               </button>
               <button 
                 onClick={() => setChatMode("RAG")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${chatMode === "RAG" ? 'bg-[#10b981] text-white shadow-lg' : 'text-[#9ea3b0] hover:text-white'}`}
+                className={`flex-1 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${chatMode === "RAG" ? 'bg-[#10b981] text-white shadow-md transform scale-[1.02]' : 'text-[#9ea3b0] hover:text-[#f0f0f5] hover:bg-[#1c1d29]'}`}
               >
                 RAG Knowledge Base
               </button>
