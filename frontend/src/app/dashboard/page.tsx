@@ -210,12 +210,11 @@ export default function InsightsDashboard() {
 
   return (
     <div className="bg-[#0a0a0f] text-[#f0f0f5] p-8">
-      <header className="flex items-center justify-between mb-10">
+      <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
-          <Link href="/" className="btn-secondary flex items-center gap-2 p-2 px-4 !rounded-md">
-            <ArrowLeft size={18} /> Back to Chat
+          <Link href="/" className="text-[#9ea3b0] hover:text-[#f0f0f5] flex items-center gap-2 transition-colors">
+            <ArrowLeft size={18} /> Back to AI Analyst
           </Link>
-          <h1 className="text-3xl font-bold gradient-text">Executive Dashboard</h1>
         </div>
         <div className="flex gap-3 relative">
           <button 

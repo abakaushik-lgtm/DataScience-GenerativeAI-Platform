@@ -72,9 +72,6 @@ export default function AdvancedMLDashboard() {
 
   return (
     <div className="bg-[#0a0a0f] text-[#f0f0f5] p-8">
-      <h1 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400">
-        Advanced ML Studio
-      </h1>
       
       {/* Navigation Tabs */}
       <div className="flex gap-4 mb-8">
