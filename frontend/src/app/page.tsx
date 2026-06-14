@@ -14,12 +14,7 @@ interface Message {
 }
 
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "assistant",
-      content: "Welcome to AntiGravity\n\nAsk questions about:\n• Databases\n• CSV files\n• PDFs\n• Business metrics\n\nExamples:\n\"Why did sales drop last month?\"\n\"Forecast revenue for Q3\"\n\"Summarize uploaded documents\"",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [chatMode, setChatMode] = useState<"SQL" | "RAG">("SQL");
@@ -187,10 +182,18 @@ export default function Home() {
           ))}
 
           {/* Empty State / Dashboard Home */}
-          {messages.length === 1 && !loading && (
-            <div className="mt-8 animate-fade-in space-y-8">
+          {messages.length === 0 && !loading && (
+            <div className="mt-8 animate-fade-in space-y-8 max-w-5xl mx-auto w-full flex flex-col items-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] rounded-2xl flex items-center justify-center shadow-[0_4px_20px_rgba(99,102,241,0.4)] mb-2 mt-4">
+                <Activity size={32} className="text-white" />
+              </div>
+              <h1 className="text-3xl font-bold text-[#f0f0f5] mb-2">Welcome to AntiGravity</h1>
+              <p className="text-[#9ea3b0] text-center max-w-lg mb-8 leading-relaxed">
+                Your AI-powered Data Analyst. Ask questions about your structured <strong className="text-[#f0f0f5] font-semibold">Databases</strong> and <strong className="text-[#f0f0f5] font-semibold">CSV files</strong>, or query unstructured <strong className="text-[#f0f0f5] font-semibold">PDF documents</strong> and <strong className="text-[#f0f0f5] font-semibold">Business metrics</strong>.
+              </p>
+
               {/* Hero Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2 w-full">
                 <div className="bg-[#13141c] p-5 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] transition-all cursor-default">
                   <div className="p-3 bg-[#3b82f6]/10 rounded-xl text-[#3b82f6] mb-3"><Database size={24} /></div>
                   <div className="text-3xl font-bold text-[#f0f0f5]">12</div>
