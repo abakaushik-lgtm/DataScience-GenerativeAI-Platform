@@ -49,10 +49,12 @@ export default function Home() {
     }
   };
 
-  const handleSendMessage = async () => {
-    if (!query.trim()) return;
+  const handleSendMessage = async (textOverride?: string | React.MouseEvent | React.KeyboardEvent) => {
+    // If textOverride is a string, use it, otherwise use query state
+    const textToSend = typeof textOverride === 'string' ? textOverride : query;
+    if (!textToSend.trim()) return;
 
-    const userMessage: Message = { role: "user", content: query };
+    const userMessage: Message = { role: "user", content: textToSend };
     setMessages((prev) => [...prev, userMessage]);
     setQuery("");
     setLoading(true);
@@ -237,16 +239,21 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-[#13141c] p-6 rounded-xl border border-[#ffffff14] hover:shadow-lg transition-all">
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    <Send size={18} className="text-[#3b82f6]" /> Suggested Questions
+                    <Send size={18} className="text-[#3b82f6]" /> Suggested Actions
                   </h3>
-                  <div className="space-y-3">
-                    {["Why did revenue decrease last quarter?", "Forecast next quarter sales based on seasonality", "Find the most profitable customer segments"].map((q, i) => (
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      { label: "Revenue Analysis", query: "Why did revenue decrease last quarter?" },
+                      { label: "Forecast Q3", query: "Forecast next quarter sales based on seasonality" },
+                      { label: "Customer Churn", query: "Find the most profitable customer segments and churn risks" },
+                      { label: "Document Summary", query: "Summarize the key findings from the uploaded documents" }
+                    ].map((item, i) => (
                       <button 
                         key={i} 
-                        onClick={() => setQuery(q)}
-                        className="w-full text-left px-4 py-3 rounded-lg bg-[#1c1d29] border border-[#ffffff14] hover:border-[#3b82f6] hover:bg-[#252636] transition-all text-sm text-[#9ea3b0] hover:text-[#f0f0f5]"
+                        onClick={() => handleSendMessage(item.query)}
+                        className="px-4 py-2 rounded-full bg-[#1c1d29] border border-[#ffffff14] hover:border-[#3b82f6] hover:bg-[#3b82f6]/10 transition-all text-sm font-medium text-[#9ea3b0] hover:text-[#3b82f6]"
                       >
-                        {q}
+                        {item.label}
                       </button>
                     ))}
                   </div>
