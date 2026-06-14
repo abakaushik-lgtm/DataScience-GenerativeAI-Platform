@@ -32,7 +32,7 @@ export default function Home() {
       formData.append("file", selectedFile);
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
         const response = await fetch(`${apiUrl}/api/rag/upload`, {
           method: "POST",
           body: formData,
@@ -61,7 +61,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       const endpoint = chatMode === "SQL" ? `${apiUrl}/api/analyst/query` : `${apiUrl}/api/rag/query`;
       const body: any = { question: userMessage.content };
       

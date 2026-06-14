@@ -18,7 +18,7 @@ export default function AdvancedMLDashboard() {
 
   const runABTest = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/advanced-ml/ab-test', {
+      const res = await fetch('/api/advanced-ml/ab-test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -42,7 +42,7 @@ export default function AdvancedMLDashboard() {
     data[80] = -20.0; // Inject anomaly
 
     try {
-      const res = await fetch('http://localhost:8000/api/advanced-ml/anomalies', {
+      const res = await fetch('/api/advanced-ml/anomalies', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data })
@@ -58,7 +58,7 @@ export default function AdvancedMLDashboard() {
     // Generate synthetic X matrix
     const X = Array.from({length: 50}, () => Array.from({length: 5}, () => Math.random()));
     try {
-      const res = await fetch('http://localhost:8000/api/advanced-ml/shap', {
+      const res = await fetch('/api/advanced-ml/shap', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ model_type: 'random_forest', X })

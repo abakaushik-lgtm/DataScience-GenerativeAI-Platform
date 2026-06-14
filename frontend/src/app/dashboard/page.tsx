@@ -31,7 +31,8 @@ export default function InsightsDashboard() {
     // Fetch insights from our FastAPI backend
     const fetchInsights = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/insights/generate", {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+        const response = await fetch(`${apiUrl}/api/insights/generate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ db_type: "mock" })
@@ -51,7 +52,7 @@ export default function InsightsDashboard() {
   const handleRunForecast = async () => {
     setLoadingForecast(true);
     try {
-      const response = await fetch("http://localhost:8000/api/forecasting/predict", {
+      const response = await fetch("/api/forecasting/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -74,7 +75,7 @@ export default function InsightsDashboard() {
   const handleRunAutoML = async () => {
     setLoadingAutoML(true);
     try {
-      const response = await fetch("http://localhost:8000/api/automl/train", {
+      const response = await fetch("/api/automl/train", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -101,7 +102,7 @@ export default function InsightsDashboard() {
         automl: autoMLData
       };
       
-      const response = await fetch("http://localhost:8000/api/advanced-reports/generate", {
+      const response = await fetch("/api/advanced-reports/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

@@ -1,0 +1,8 @@
+fastapi==0.103.1
+uvicorn==0.23.2
+pydantic==2.3.0
+sqlalchemy==2.0.20
+langchain-openai==0.0.2
+langgraph==0.0.15
+redis==5.0.0
+python-multipart==0.0.6
