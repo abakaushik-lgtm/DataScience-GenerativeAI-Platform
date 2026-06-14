@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CopilotWidget from "@/components/CopilotWidget";
 import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +30,11 @@ export default function RootLayout({
       <body>
         <div className="flex h-screen bg-[#0a0a0f] text-[#f0f0f5] overflow-hidden">
           <Sidebar />
-          <div className="flex-1 overflow-y-auto relative custom-scrollbar">
-            {children}
+          <div className="flex-1 flex flex-col overflow-hidden relative">
+            <Header />
+            <main className="flex-1 overflow-y-auto custom-scrollbar">
+              {children}
+            </main>
           </div>
         </div>
         <CopilotWidget />
