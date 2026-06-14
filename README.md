@@ -27,6 +27,19 @@ In modern enterprises, extracting actionable insights requires a synchronized pi
 
 ---
 
+## 💻 Platform Preview
+
+### Dashboard
+![Dashboard](docs/assets/dashboard.png)
+
+### AI Copilot
+![Copilot](docs/assets/copilot.png)
+
+### Forecasting
+![Forecasting](docs/assets/forecasting.png)
+
+---
+
 ## ✨ Key Features
 
 ### 🧠 AI Data Analyst
@@ -149,18 +162,6 @@ graph TD
 | **Relational Database**| PostgreSQL | User state, connection profiles, and report storage |
 | **Caching Layer** | Redis | Ephemeral session state and high-speed API caching |
 | **Infrastructure** | Docker, Kubernetes | Microservices containerization and orchestration |
-
----
-
-## 📸 Interface Screenshots
-
-### The Core AI Analytics Dashboard
-*The natural language SQL chat and ECharts visualizations.*
-![Dashboard Interface](./docs/assets/wireframe_dashboard.png)
-
-### The Advanced ML Studio
-*The A/B Testing Simulator and SHAP explainability charts.*
-![Advanced ML Studio](./docs/assets/wireframe_advanced_ml.png)
 
 ---
 
