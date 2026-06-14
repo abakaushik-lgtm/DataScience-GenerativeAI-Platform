@@ -196,45 +196,57 @@ export default function Home() {
               </p>
 
               {/* Hero Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-4 w-full">
-                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10 w-full">
+                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-[#3b82f6] opacity-30 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute inset-0 bg-gradient-to-b from-[#3b82f6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="p-3 bg-[#3b82f6]/10 rounded-xl text-[#3b82f6] mb-3 relative z-10"><Database size={24} /></div>
-                  <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">12</div>
-                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1 mb-4 relative z-10">Total Datasets</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 border border-[#10b981]/20 px-2.5 py-1 rounded-full flex items-center gap-1 relative z-10">
-                    <TrendingUp size={12} /> +3 this week
+                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
+                    <div className="p-3 bg-[#3b82f6]/10 rounded-2xl text-[#3b82f6]"><Database size={24} /></div>
+                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <TrendingUp size={12} /> +3 wk
+                    </div>
                   </div>
+                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">12</div>
+                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Total Datasets</div>
                 </div>
                 
-                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
+                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-[#10b981] opacity-30 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute inset-0 bg-gradient-to-b from-[#10b981]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="p-3 bg-[#10b981]/10 rounded-xl text-[#10b981] mb-3 relative z-10"><FileText size={24} /></div>
-                  <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">84</div>
-                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1 mb-4 relative z-10">Reports Generated</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 border border-[#10b981]/20 px-2.5 py-1 rounded-full flex items-center gap-1 relative z-10">
-                    <TrendingUp size={12} /> +12 this week
+                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
+                    <div className="p-3 bg-[#10b981]/10 rounded-2xl text-[#10b981]"><FileText size={24} /></div>
+                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <TrendingUp size={12} /> +12 wk
+                    </div>
                   </div>
+                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">84</div>
+                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Reports Generated</div>
                 </div>
                 
-                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
+                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-[#8b5cf6] opacity-30 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute inset-0 bg-gradient-to-b from-[#8b5cf6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="p-3 bg-[#8b5cf6]/10 rounded-xl text-[#8b5cf6] mb-3 relative z-10"><Cpu size={24} /></div>
-                  <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">17</div>
-                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1 mb-4 relative z-10">Models Trained</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 border border-[#10b981]/20 px-2.5 py-1 rounded-full flex items-center gap-1 relative z-10">
-                    <TrendingUp size={12} /> +2 this week
+                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
+                    <div className="p-3 bg-[#8b5cf6]/10 rounded-2xl text-[#8b5cf6]"><Cpu size={24} /></div>
+                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <TrendingUp size={12} /> +2 wk
+                    </div>
                   </div>
+                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">17</div>
+                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Models Trained</div>
                 </div>
                 
-                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-6 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-xl ring-1 ring-white/5">
+                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-[#f59e0b] opacity-30 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute inset-0 bg-gradient-to-b from-[#f59e0b]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="p-3 bg-[#f59e0b]/10 rounded-xl text-[#f59e0b] mb-3 relative z-10"><BookOpen size={24} /></div>
-                  <div className="text-3xl font-bold text-[#f0f0f5] relative z-10">320</div>
-                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1 mb-4 relative z-10">Knowledge Docs</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 border border-[#10b981]/20 px-2.5 py-1 rounded-full flex items-center gap-1 relative z-10">
-                    <TrendingUp size={12} /> +45 this month
+                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
+                    <div className="p-3 bg-[#f59e0b]/10 rounded-2xl text-[#f59e0b]"><BookOpen size={24} /></div>
+                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <TrendingUp size={12} /> +45 mo
+                    </div>
                   </div>
+                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">320</div>
+                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Knowledge Docs</div>
                 </div>
               </div>
 
