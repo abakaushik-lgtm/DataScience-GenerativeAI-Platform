@@ -145,25 +145,25 @@ export default function DataExplorer() {
             
             {/* Table Header Row */}
             <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-sm text-left whitespace-nowrap">
-                <thead className="text-xs uppercase bg-[#1c1d29] text-[#9ea3b0] sticky top-0 z-10 shadow-sm">
+              <table className="w-full text-sm whitespace-nowrap table-fixed">
+                <thead className="text-xs uppercase bg-[#0a0a0a] text-[#a1a1aa] sticky top-0 z-10 shadow-sm border-b border-[#ffffff14]">
                   <tr>
                     {activeDataset.schema.map((col) => (
-                      <th key={col.name} className="px-6 py-4 font-semibold tracking-wider border-b border-[#ffffff14]">
-                        <div className="flex items-center gap-2">
+                      <th key={col.name} className={`px-6 py-4 font-semibold tracking-wider ${(col.type === "number" || col.type === "integer") ? "text-right" : "text-left"}`}>
+                        <div className={`flex items-center gap-2 ${(col.type === "number" || col.type === "integer") ? "justify-end" : "justify-start"}`}>
                           {col.icon} {col.name}
                         </div>
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#ffffff14]">
+                <tbody className="divide-y divide-[#ffffff0a]">
                   {activeDataset.data.filter(row => 
                     Object.values(row).some(val => String(val).toLowerCase().includes(searchQuery.toLowerCase()))
                   ).map((row, idx) => (
-                    <tr key={idx} className="hover:bg-[#1c1d29] transition-colors group">
+                    <tr key={idx} className={`${idx % 2 === 0 ? "bg-[#121212]" : "bg-[#0a0a0a]"} hover:bg-[#2563eb]/10 transition-colors group`}>
                       {activeDataset.schema.map((col) => (
-                        <td key={col.name} className="px-6 py-3.5 text-[#f0f0f5] group-hover:text-white">
+                        <td key={col.name} className={`px-6 py-3.5 text-[#ffffff] group-hover:text-white ${(col.type === "number" || col.type === "integer") ? "text-right" : "text-left"}`}>
                           {col.type === "number" || col.type === "integer" 
                             ? <span className="text-[#10b981] font-mono">{row[col.name as keyof typeof row]}</span>
                             : String(row[col.name as keyof typeof row])

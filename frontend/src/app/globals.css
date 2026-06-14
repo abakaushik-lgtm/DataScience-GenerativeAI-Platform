@@ -3,32 +3,33 @@
 @tailwind utilities;
 
 :root {
-  /* Core Colors */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #13141c;
-  --bg-tertiary: #1c1d29;
+  /* Core Colors - Obsidian Theme */
+  --bg-primary: #050505;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #121212;
   
-  --text-primary: #f0f0f5;
-  --text-secondary: #9ea3b0;
-  --text-tertiary: #6b7280;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
 
-  --accent-primary: #6366f1; /* Indigo */
-  --accent-secondary: #8b5cf6; /* Violet */
-  --accent-glow: rgba(99, 102, 241, 0.5);
+  /* Vibrant Accents */
+  --accent-primary: #2563eb; /* Vibrant Blue */
+  --accent-secondary: #06b6d4; /* Cyan */
+  --accent-glow: rgba(37, 99, 235, 0.4);
 
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
 
   /* Glassmorphism Utilities */
-  --glass-bg: rgba(19, 20, 28, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --glass-blur: blur(12px);
+  --glass-bg: rgba(18, 18, 18, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  --glass-blur: blur(16px);
 
   /* Typography */
-  --font-base: var(--font-geist-sans), 'Inter', sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-base: var(--font-sans), 'Inter', sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
 
   /* Spacing */
   --space-1: 0.25rem;

@@ -161,20 +161,20 @@ export default function Home() {
                 )}
                 
                 {msg.data && msg.data.length > 0 && (
-                  <div className="mt-4 overflow-x-auto border border-[#ffffff14] rounded-md">
-                    <table className="w-full text-sm text-left">
-                      <thead className="text-xs text-[#9ea3b0] uppercase bg-[#13141c]">
+                  <div className="mt-4 overflow-x-auto border border-[#ffffff14] rounded-md custom-scrollbar">
+                    <table className="w-full text-sm whitespace-nowrap table-fixed">
+                      <thead className="text-xs uppercase bg-[#050505] text-[#a1a1aa]">
                         <tr>
                           {Object.keys(msg.data[0]).map((key) => (
-                            <th key={key} className="px-4 py-2">{key}</th>
+                            <th key={key} className={`px-4 py-3 font-semibold tracking-wider border-b border-[#ffffff14] ${typeof msg.data![0][key] === "number" ? "text-right" : "text-left"}`}>{key}</th>
                           ))}
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="divide-y divide-[#ffffff0a]">
                         {msg.data.slice(0, 5).map((row, i) => (
-                          <tr key={i} className="border-b border-[#ffffff14] last:border-0 hover:bg-[#1c1d29]">
+                          <tr key={i} className={`${i % 2 === 0 ? "bg-[#121212]" : "bg-[#0a0a0a]"} hover:bg-[#2563eb]/10 transition-colors`}>
                             {Object.values(row).map((val: any, j) => (
-                              <td key={j} className="px-4 py-2">{String(val)}</td>
+                              <td key={j} className={`px-4 py-2 ${typeof val === "number" ? "text-right text-[#10b981] font-mono" : "text-left text-[#ffffff]"}`}>{String(val)}</td>
                             ))}
                           </tr>
                         ))}
