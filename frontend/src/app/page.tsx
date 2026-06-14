@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
-import { LayoutDashboard, Loader2, Send, Upload, BookOpen, Activity } from "lucide-react";
+import { LayoutDashboard, Loader2, Send, Upload, BookOpen, Activity, Database, FileText, Cpu } from "lucide-react";
 import ReactECharts from "echarts-for-react";
 
 interface Message {
@@ -184,22 +184,27 @@ export default function Home() {
           {/* Empty State / Dashboard Home */}
           {messages.length === 1 && !loading && (
             <div className="mt-8 animate-fade-in space-y-8">
-              {/* Metrics Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass-panel p-5 border-l-4 border-l-[#10b981]">
-                  <h3 className="text-[#9ea3b0] text-sm uppercase tracking-wider mb-2">Revenue Trends</h3>
-                  <div className="text-2xl font-bold text-[#f0f0f5]">+24.5%</div>
-                  <div className="text-xs text-[#10b981] mt-1">↑ vs last quarter</div>
+              {/* Hero Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2">
+                <div className="bg-[#13141c] p-5 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] transition-all cursor-default">
+                  <div className="p-3 bg-[#3b82f6]/10 rounded-xl text-[#3b82f6] mb-3"><Database size={24} /></div>
+                  <div className="text-3xl font-bold text-[#f0f0f5]">12</div>
+                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1">Total Datasets</div>
                 </div>
-                <div className="glass-panel p-5 border-l-4 border-l-[#ef4444]">
-                  <h3 className="text-[#9ea3b0] text-sm uppercase tracking-wider mb-2">Customer Churn</h3>
-                  <div className="text-2xl font-bold text-[#f0f0f5]">4.2%</div>
-                  <div className="text-xs text-[#ef4444] mt-1">↓ requires attention</div>
+                <div className="bg-[#13141c] p-5 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] transition-all cursor-default">
+                  <div className="p-3 bg-[#10b981]/10 rounded-xl text-[#10b981] mb-3"><FileText size={24} /></div>
+                  <div className="text-3xl font-bold text-[#f0f0f5]">84</div>
+                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1">Reports Generated</div>
                 </div>
-                <div className="glass-panel p-5 border-l-4 border-l-[#3b82f6]">
-                  <h3 className="text-[#9ea3b0] text-sm uppercase tracking-wider mb-2">Top Products</h3>
-                  <div className="text-2xl font-bold text-[#f0f0f5]">Pro Tier</div>
-                  <div className="text-xs text-[#3b82f6] mt-1">45% of total sales</div>
+                <div className="bg-[#13141c] p-5 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] transition-all cursor-default">
+                  <div className="p-3 bg-[#8b5cf6]/10 rounded-xl text-[#8b5cf6] mb-3"><Cpu size={24} /></div>
+                  <div className="text-3xl font-bold text-[#f0f0f5]">17</div>
+                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1">Models Trained</div>
+                </div>
+                <div className="bg-[#13141c] p-5 rounded-2xl border border-[#ffffff14] flex flex-col items-center justify-center text-center hover:bg-[#1c1d29] transition-all cursor-default">
+                  <div className="p-3 bg-[#f59e0b]/10 rounded-xl text-[#f59e0b] mb-3"><BookOpen size={24} /></div>
+                  <div className="text-3xl font-bold text-[#f0f0f5]">320</div>
+                  <div className="text-xs text-[#9ea3b0] font-semibold uppercase tracking-wider mt-1">Knowledge Docs</div>
                 </div>
               </div>
 
