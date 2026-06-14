@@ -98,14 +98,14 @@ export default function Home() {
   return (
     <div className="flex flex-col relative h-full">
         {/* Header */}
-        <header className="h-16 border-b border-[#ffffff14] flex items-center px-6 glass-panel rounded-none">
+        <header className="h-20 border-b border-[#ffffff14] flex items-center px-8 glass-panel rounded-none z-30 relative">
           <div className="flex flex-col justify-center">
-            <span className="text-xl font-bold tracking-tight text-[#f0f0f5]">AntiGravity</span>
-            <span className="text-[10px] text-[#3b82f6] font-semibold tracking-widest uppercase">Enterprise AI Analytics Platform</span>
+            <span className="text-3xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-[#9ea3b0]">AntiGravity</span>
+            <span className="text-[10px] text-[#3b82f6] font-bold tracking-[0.2em] uppercase mt-1">Enterprise AI Analytics Platform</span>
           </div>
-          <div className="mx-5 h-8 w-px bg-[#ffffff14]"></div>
-          <h2 className="text-sm font-medium text-[#9ea3b0]">AI Data Analyst</h2>
-          <div className="ml-auto flex items-center gap-2 text-sm text-[#10b981]">
+          <div className="mx-8 h-10 w-px bg-[#ffffff14]"></div>
+          <h2 className="text-xs font-semibold text-[#6b7280] tracking-wider uppercase">AI Data Analyst</h2>
+          <div className="ml-auto flex items-center gap-2 text-xs font-medium text-[#10b981] bg-[#10b981]/10 px-3 py-1.5 rounded-full border border-[#10b981]/20">
             <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
             System Online
           </div>
