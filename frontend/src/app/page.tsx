@@ -115,17 +115,17 @@ export default function Home() {
         <div className="flex-1 overflow-y-auto p-6 space-y-6 relative">
           
           {/* Floating Pill Toggle */}
-          <div className="flex justify-center mb-6 sticky top-2 z-20">
-            <div className="bg-[#13141c]/80 backdrop-blur-lg p-1.5 rounded-full inline-flex border border-[#ffffff2a] shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+          <div className="flex justify-center mb-8 sticky top-4 z-20">
+            <div className="bg-[#1c1d29]/90 backdrop-blur-md p-1.5 rounded-full inline-flex border border-[#ffffff14] shadow-xl">
               <button 
                 onClick={() => setChatMode("SQL")}
-                className={`px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${chatMode === "SQL" ? 'bg-[#3b82f6] text-white shadow-[0_0_25px_rgba(59,130,246,0.5)]' : 'text-[#6b7280] hover:text-[#f0f0f5]'}`}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${chatMode === "SQL" ? 'bg-[#3b82f6] text-white shadow-md' : 'text-[#9ea3b0] hover:text-[#f0f0f5] hover:bg-[#ffffff0a]'}`}
               >
                 SQL Analyst
               </button>
               <button 
                 onClick={() => setChatMode("RAG")}
-                className={`px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${chatMode === "RAG" ? 'bg-[#10b981] text-white shadow-[0_0_25px_rgba(16,185,129,0.5)]' : 'text-[#6b7280] hover:text-[#f0f0f5]'}`}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${chatMode === "RAG" ? 'bg-[#10b981] text-white shadow-md' : 'text-[#9ea3b0] hover:text-[#f0f0f5] hover:bg-[#ffffff0a]'}`}
               >
                 RAG Knowledge Base
               </button>
@@ -196,57 +196,37 @@ export default function Home() {
               </p>
 
               {/* Hero Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10 w-full">
-                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-[#3b82f6] opacity-30 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#3b82f6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
-                    <div className="p-3 bg-[#3b82f6]/10 rounded-2xl text-[#3b82f6]"><Database size={24} /></div>
-                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <TrendingUp size={12} /> +3 wk
-                    </div>
+              <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto w-full mb-10">
+                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#3b82f6]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
+                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">12</div>
+                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Total Data</div>
+                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
+                    <TrendingUp size={12} /> +3 week
                   </div>
-                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">12</div>
-                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Total Datasets</div>
                 </div>
                 
-                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-[#10b981] opacity-30 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#10b981]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
-                    <div className="p-3 bg-[#10b981]/10 rounded-2xl text-[#10b981]"><FileText size={24} /></div>
-                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <TrendingUp size={12} /> +12 wk
-                    </div>
+                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#10b981]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
+                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">84</div>
+                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Reports Gen</div>
+                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
+                    <TrendingUp size={12} /> +12 week
                   </div>
-                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">84</div>
-                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Reports Generated</div>
                 </div>
                 
-                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-[#8b5cf6] opacity-30 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#8b5cf6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
-                    <div className="p-3 bg-[#8b5cf6]/10 rounded-2xl text-[#8b5cf6]"><Cpu size={24} /></div>
-                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <TrendingUp size={12} /> +2 wk
-                    </div>
+                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#8b5cf6]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
+                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">17</div>
+                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Models</div>
+                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
+                    <TrendingUp size={12} /> +2 week
                   </div>
-                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">17</div>
-                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Models Trained</div>
                 </div>
                 
-                <div className="bg-[#13141c] p-7 rounded-[2rem] flex flex-col items-start justify-center text-left hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-all duration-300 cursor-default relative overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-[#f59e0b] opacity-30 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#f59e0b]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="flex justify-between items-start w-full relative z-10 mb-4">
-                    <div className="p-3 bg-[#f59e0b]/10 rounded-2xl text-[#f59e0b]"><BookOpen size={24} /></div>
-                    <div className="text-[11px] text-[#10b981] font-semibold bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <TrendingUp size={12} /> +45 mo
-                    </div>
+                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#f59e0b]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
+                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">320</div>
+                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Knowledge</div>
+                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
+                    <TrendingUp size={12} /> +45 month
                   </div>
-                  <div className="text-4xl font-extrabold text-[#f0f0f5] relative z-10 mb-1 tracking-tight">320</div>
-                  <div className="text-sm text-[#9ea3b0] font-medium relative z-10">Knowledge Docs</div>
                 </div>
               </div>
 
@@ -256,7 +236,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
                     <Send size={18} className="text-[#3b82f6]" /> Suggested Actions
                   </h3>
-                  <div className="flex flex-col items-start gap-3 mt-4">
+                  <div className="flex flex-wrap gap-3 mt-4">
                     {[
                       { label: "Revenue Analysis", query: "Why did revenue decrease last quarter?" },
                       { label: "Forecast Q3", query: "Forecast next quarter sales based on seasonality" },
@@ -266,7 +246,7 @@ export default function Home() {
                       <button 
                         key={i} 
                         onClick={() => handleSendMessage(item.query)}
-                        className="px-6 py-3 rounded-full bg-[#13141c] border border-[#ffffff2a] hover:border-[#3b82f6]/60 hover:bg-[#3b82f6]/10 transition-all duration-300 text-sm font-semibold text-[#e2e8f0] hover:text-[#3b82f6] shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.25)] flex items-center justify-start min-w-[220px] gap-2 hover:translate-x-1"
+                        className="px-5 py-2.5 rounded-full bg-[#1c1d29] border border-[#ffffff2a] hover:border-[#3b82f6] hover:bg-[#3b82f6]/10 transition-all duration-200 text-sm font-medium text-[#f0f0f5] shadow-sm flex items-center gap-2"
                       >
                         {item.label}
                       </button>
