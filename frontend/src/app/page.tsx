@@ -32,9 +32,12 @@ export default function Home() {
       formData.append("file", selectedFile);
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
         const response = await fetch(`${apiUrl}/api/rag/upload`, {
           method: "POST",
+          headers: {
+            "Bypass-Tunnel-Reminder": "true"
+          },
           body: formData,
         });
         const data = await response.json();
@@ -61,7 +64,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
       const endpoint = chatMode === "SQL" ? `${apiUrl}/api/analyst/query` : `${apiUrl}/api/rag/query`;
       const body: any = { question: userMessage.content };
       
@@ -72,7 +75,10 @@ export default function Home() {
 
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Bypass-Tunnel-Reminder": "true"
+        },
         body: JSON.stringify(body),
       });
 
