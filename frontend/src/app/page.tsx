@@ -265,27 +265,37 @@ export default function Home() {
         </div>
 
         {/* Input Area */}
-        <div className="p-6">
-          <div className="relative flex items-center">
-            <input
-              type="text"
+        <div className="p-6 max-w-4xl mx-auto w-full">
+          <div className="relative bg-[#1c1d29] border border-[#ffffff14] rounded-2xl shadow-xl focus-within:border-[#6366f1] focus-within:ring-1 focus-within:ring-[#6366f1]/50 transition-all">
+            <textarea
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-              placeholder={chatMode === "SQL" ? "Ask a question about your structured database..." : "Ask a question about your uploaded documents..."}
-              className="w-full bg-[#1c1d29] border border-[#ffffff14] rounded-full py-4 pl-6 pr-16 text-[#f0f0f5] placeholder-[#6b7280] focus:outline-none focus:border-[#3b82f6] transition-all shadow-inner"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+              placeholder="Ask AntiGravity anything..."
+              rows={3}
+              className="w-full bg-transparent p-4 text-[#f0f0f5] placeholder-[#6b7280] resize-none focus:outline-none custom-scrollbar"
             />
-            <button
-              onClick={handleSendMessage}
-              disabled={loading || !query.trim()}
-              className={`absolute right-2 p-3 rounded-full transition-all ${
-                query.trim() ? (chatMode === "SQL" ? 'bg-[#3b82f6] hover:bg-[#2563eb]' : 'bg-[#10b981] hover:bg-[#059669]') : 'bg-[#2a2b36] text-[#6b7280]'
-              }`}
-            >
-              {loading ? <Loader2 size={18} className="animate-spin text-white" /> : <Send size={18} className={query.trim() ? "text-white" : ""} />}
-            </button>
+            <div className="flex justify-between items-center p-3 border-t border-[#ffffff0a]">
+              <div className="text-xs text-[#6b7280] ml-2">
+                 Press <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> to send, <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Shift + Enter</kbd> for new line
+              </div>
+              <button
+                onClick={handleSendMessage}
+                disabled={loading || !query.trim()}
+                className={`p-2.5 rounded-xl flex items-center justify-center transition-all ${
+                  query.trim() ? (chatMode === "SQL" ? 'bg-[#3b82f6] hover:bg-[#2563eb] shadow-md' : 'bg-[#10b981] hover:bg-[#059669] shadow-md') : 'bg-[#2a2b36] text-[#6b7280]'
+                }`}
+              >
+                {loading ? <Loader2 size={18} className="animate-spin text-white" /> : <Send size={18} className={query.trim() ? "text-white" : ""} />}
+              </button>
+            </div>
           </div>
-          <div className="text-center text-xs text-[#6b7280] mt-3">
+          <div className="text-center text-xs text-[#6b7280] mt-4">
             AntiGravity AI Analyst can make mistakes. Verify critical business insights.
           </div>
         </div>
