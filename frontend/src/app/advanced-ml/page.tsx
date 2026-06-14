@@ -18,9 +18,10 @@ export default function AdvancedMLDashboard() {
 
   const runABTest = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/advanced-ml/ab-test', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
+      const res = await fetch(`${apiUrl}/api/advanced-ml/ab-test`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Bypass-Tunnel-Reminder': 'true' },
         body: JSON.stringify({
           control_conversions: abParams.controlConvs,
           control_size: abParams.controlSize,
@@ -42,9 +43,10 @@ export default function AdvancedMLDashboard() {
     data[80] = -20.0; // Inject anomaly
 
     try {
-      const res = await fetch('http://localhost:8000/api/advanced-ml/anomalies', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
+      const res = await fetch(`${apiUrl}/api/advanced-ml/anomalies`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Bypass-Tunnel-Reminder': 'true' },
         body: JSON.stringify({ data })
       });
       const result = await res.json();
@@ -58,9 +60,10 @@ export default function AdvancedMLDashboard() {
     // Generate synthetic X matrix
     const X = Array.from({length: 50}, () => Array.from({length: 5}, () => Math.random()));
     try {
-      const res = await fetch('http://localhost:8000/api/advanced-ml/shap', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://proud-memes-fail.loca.lt";
+      const res = await fetch(`${apiUrl}/api/advanced-ml/shap`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Bypass-Tunnel-Reminder': 'true' },
         body: JSON.stringify({ model_type: 'random_forest', X })
       });
       const data = await res.json();
