@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
-import { LayoutDashboard, Loader2, Send, Upload, BookOpen } from "lucide-react";
+import { LayoutDashboard, Loader2, Send, Upload, BookOpen, Activity } from "lucide-react";
 import ReactECharts from "echarts-for-react";
 
 interface Message {
@@ -233,6 +233,79 @@ export default function Home() {
               </div>
             </div>
           ))}
+
+          {/* Empty State / Dashboard Home */}
+          {messages.length === 1 && !loading && (
+            <div className="mt-8 animate-fade-in space-y-8">
+              {/* Metrics Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="glass-panel p-5 border-l-4 border-l-[#10b981]">
+                  <h3 className="text-[#9ea3b0] text-sm uppercase tracking-wider mb-2">Revenue Trends</h3>
+                  <div className="text-2xl font-bold text-[#f0f0f5]">+24.5%</div>
+                  <div className="text-xs text-[#10b981] mt-1">↑ vs last quarter</div>
+                </div>
+                <div className="glass-panel p-5 border-l-4 border-l-[#ef4444]">
+                  <h3 className="text-[#9ea3b0] text-sm uppercase tracking-wider mb-2">Customer Churn</h3>
+                  <div className="text-2xl font-bold text-[#f0f0f5]">4.2%</div>
+                  <div className="text-xs text-[#ef4444] mt-1">↓ requires attention</div>
+                </div>
+                <div className="glass-panel p-5 border-l-4 border-l-[#3b82f6]">
+                  <h3 className="text-[#9ea3b0] text-sm uppercase tracking-wider mb-2">Top Products</h3>
+                  <div className="text-2xl font-bold text-[#f0f0f5]">Pro Tier</div>
+                  <div className="text-xs text-[#3b82f6] mt-1">45% of total sales</div>
+                </div>
+              </div>
+
+              {/* Sample Prompts & Recent */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-[#13141c] p-6 rounded-xl border border-[#ffffff14] hover:shadow-lg transition-all">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Send size={18} className="text-[#3b82f6]" /> Suggested Questions
+                  </h3>
+                  <div className="space-y-3">
+                    {["Why did revenue decrease last quarter?", "Forecast next quarter sales based on seasonality", "Find the most profitable customer segments"].map((q, i) => (
+                      <button 
+                        key={i} 
+                        onClick={() => setQuery(q)}
+                        className="w-full text-left px-4 py-3 rounded-lg bg-[#1c1d29] border border-[#ffffff14] hover:border-[#3b82f6] hover:bg-[#252636] transition-all text-sm text-[#9ea3b0] hover:text-[#f0f0f5]"
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-[#13141c] p-6 rounded-xl border border-[#ffffff14] hover:shadow-lg transition-all">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Activity size={18} className="text-[#10b981]" /> Active Datasets
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#1c1d29] border border-[#ffffff14]">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-[#10b981]/10 rounded-md text-[#10b981]"><LayoutDashboard size={16}/></div>
+                        <div>
+                          <div className="text-sm font-medium">sales_data_q3.csv</div>
+                          <div className="text-xs text-[#6b7280]">12,450 rows • 1.2 MB</div>
+                        </div>
+                      </div>
+                      <div className="text-xs text-[#10b981] px-2 py-1 bg-[#10b981]/10 rounded-full">Active</div>
+                    </div>
+                    <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#1c1d29] border border-[#ffffff14]">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-[#f59e0b]/10 rounded-md text-[#f59e0b]"><BookOpen size={16}/></div>
+                        <div>
+                          <div className="text-sm font-medium">Q2_Earnings_Call.pdf</div>
+                          <div className="text-xs text-[#6b7280]">Vectorized • 345 chunks</div>
+                        </div>
+                      </div>
+                      <div className="text-xs text-[#f59e0b] px-2 py-1 bg-[#f59e0b]/10 rounded-full">Indexed</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {loading && (
             <div className="flex justify-start animate-fade-in">
               <div className="glass-panel rounded-2xl p-5 flex items-center gap-2 text-[#9ea3b0]">
