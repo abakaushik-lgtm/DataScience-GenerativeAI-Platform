@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="./frontend/public/globe.svg" alt="AntiGravity Logo" width="120" height="120">
+  <img src="./docs/assets/repo_banner.png" alt="AntiGravity Repo Banner" width="100%">
+  <br><br>
   <h1>AntiGravity</h1>
   <p><b>The Autonomous AI-Powered Data Science & Analytics Operating System</b></p>
   
