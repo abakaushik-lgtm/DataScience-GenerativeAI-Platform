@@ -99,60 +99,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen bg-[#0a0a0f] text-[#f0f0f5]">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-[#ffffff14] bg-[#13141c] p-6 hidden md:flex flex-col">
-        <h1 className="text-2xl font-bold gradient-text mb-8 tracking-wider">AntiGravity</h1>
-        <div className="space-y-4 flex-1">
-          <h2 className="text-sm uppercase text-[#6b7280] font-semibold tracking-widest mb-4">Data Sources</h2>
-          <div className="glass-panel p-3 cursor-pointer hover:bg-[#1c1d29] transition-colors">
-            📊 Sales_Data.csv
-          </div>
-          <div className="glass-panel p-3 cursor-pointer hover:bg-[#1c1d29] transition-colors">
-            🐘 Prod_PostgreSQL
-          </div>
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full">
-            Ask RAG Copilot
-          </button>
-
-          <a 
-            href="/advanced-ml"
-            className="block text-center mt-4 border border-indigo-600 text-indigo-400 hover:bg-indigo-600/10 font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full"
-          >
-            Open Advanced ML Studio
-          </a>
-        </div>
-
-        {/* Knowledge Base Configuration */}
-        <div className="glass-panel p-5 mt-4 border-t border-[#ffffff14]">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="text-[#10b981]" size={18} />
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-[#6b7280]">Knowledge Base</h2>
-          </div>
-          
-          <div className="relative group cursor-pointer w-full flex items-center justify-center p-4 border border-dashed border-[#ffffff14] rounded-lg hover:border-[#10b981] transition-all bg-[#0a0a0f]">
-            <input
-              type="file"
-              accept=".pdf,.txt,.md"
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              onChange={handleKbUpload}
-            />
-            <div className="flex flex-col items-center gap-2 text-[#9ea3b0] group-hover:text-[#10b981]">
-              {uploadingKb ? <Loader2 className="animate-spin" size={18} /> : <Upload size={18} />}
-              <span className="text-xs font-medium text-center">{kbFile ? kbFile.name : "Upload PDF / Doc"}</span>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-auto pt-6 border-t border-[#ffffff14]">
-          <Link href="/dashboard" className="glass-panel p-3 flex items-center justify-center gap-2 hover:bg-[#1c1d29] transition-colors text-[#10b981] font-semibold">
-            <LayoutDashboard size={18} /> View Insights Dashboard
-          </Link>
-        </div>
-      </aside>
-
-      {/* Main Chat Area */}
-      <main className="flex-1 flex flex-col relative">
+    <div className="flex flex-col relative h-full">
         {/* Header */}
         <header className="h-16 border-b border-[#ffffff14] flex items-center px-6 glass-panel rounded-none">
           <h2 className="font-semibold text-lg">AI Data Analyst</h2>
@@ -342,7 +289,7 @@ export default function Home() {
             AntiGravity AI Analyst can make mistakes. Verify critical business insights.
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

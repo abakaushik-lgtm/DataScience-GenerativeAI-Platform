@@ -71,7 +71,7 @@ export default function AdvancedMLDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white p-8">
+    <div className="bg-[#0a0a0f] text-[#f0f0f5] p-8">
       <h1 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400">
         Advanced ML Studio
       </h1>

@@ -205,7 +205,7 @@ export default function InsightsDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-[#f0f0f5] p-8">
+    <div className="bg-[#0a0a0f] text-[#f0f0f5] p-8">
       <header className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-4">
           <Link href="/" className="btn-secondary flex items-center gap-2 p-2 px-4 !rounded-md">
