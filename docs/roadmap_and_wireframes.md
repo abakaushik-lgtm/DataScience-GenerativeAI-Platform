@@ -25,9 +25,9 @@ Below are the high-fidelity UI wireframes showcasing the platform's glassmorphic
 ### 1. The Core AI Analytics Dashboard
 *Showcasing the Natural Language SQL Chat interface seamlessly integrated with interactive Apache ECharts forecasting.*
 
-![Dashboard Wireframe](file:///C:/Users/garvi/.gemini/antigravity-ide/brain/cf51ffc1-b89e-4727-ab1e-94087606e024/wireframe_dashboard_1781410158464.png)
+![Dashboard Wireframe](./assets/wireframe_dashboard.png)
 
 ### 2. The Advanced ML Studio
 *Showcasing the dedicated Data Scientist interface for SHAP Feature Importance and statistical A/B Testing.*
 
-![Advanced ML Studio Wireframe](file:///C:/Users/garvi/.gemini/antigravity-ide/brain/cf51ffc1-b89e-4727-ab1e-94087606e024/wireframe_advanced_ml_1781410170350.png)
+![Advanced ML Studio Wireframe](./assets/wireframe_advanced_ml.png)

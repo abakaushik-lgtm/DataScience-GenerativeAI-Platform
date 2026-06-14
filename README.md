@@ -154,11 +154,13 @@ graph TD
 
 ## 📸 Interface Screenshots
 
-*(Placeholders for future project screencaps)*
-- `[Dashboard Interface]` - The natural language SQL chat and ECharts visualizations.
-- `[Advanced ML Studio]` - The A/B Testing Simulator and SHAP explainability charts.
-- `[RAG Knowledge Base]` - The PDF upload and semantic search interface.
-- `[AutoML Configuration]` - The drag-and-drop machine learning pipeline.
+### The Core AI Analytics Dashboard
+*The natural language SQL chat and ECharts visualizations.*
+![Dashboard Interface](./docs/assets/wireframe_dashboard.png)
+
+### The Advanced ML Studio
+*The A/B Testing Simulator and SHAP explainability charts.*
+![Advanced ML Studio](./docs/assets/wireframe_advanced_ml.png)
 
 ---
 
