@@ -98,14 +98,14 @@ export default function Home() {
   return (
     <div className="flex flex-col relative h-full">
         {/* Header */}
-        <header className="h-20 border-b border-[#ffffff14] flex items-center px-8 glass-panel rounded-none z-30 relative">
+        <header className="h-24 border-b border-[#ffffff14] flex items-center px-10 bg-[#0a0a0f] z-30 relative">
           <div className="flex flex-col justify-center">
-            <span className="text-3xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-[#9ea3b0]">AntiGravity</span>
-            <span className="text-[10px] text-[#3b82f6] font-bold tracking-[0.2em] uppercase mt-1">Enterprise AI Analytics Platform</span>
+            <span className="text-[40px] font-black tracking-tighter text-white leading-none">AntiGravity</span>
+            <span className="text-[10px] text-[#3b82f6] font-extrabold tracking-[0.3em] uppercase mt-2">Enterprise AI Analytics Platform</span>
           </div>
-          <div className="mx-8 h-10 w-px bg-[#ffffff14]"></div>
-          <h2 className="text-xs font-semibold text-[#6b7280] tracking-wider uppercase">AI Data Analyst</h2>
-          <div className="ml-auto flex items-center gap-2 text-xs font-medium text-[#10b981] bg-[#10b981]/10 px-3 py-1.5 rounded-full border border-[#10b981]/20">
+          <div className="mx-10 h-12 w-px bg-[#ffffff14]"></div>
+          <h2 className="text-[11px] font-medium text-[#4b5563] tracking-[0.2em] uppercase">AI Data Analyst</h2>
+          <div className="ml-auto flex items-center gap-2 text-[10px] font-bold tracking-wider text-[#10b981] bg-[#10b981]/10 px-4 py-2 rounded-full border border-[#10b981]/20 uppercase">
             <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
             System Online
           </div>
