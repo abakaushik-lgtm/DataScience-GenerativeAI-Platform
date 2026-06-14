@@ -111,23 +111,26 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Chat History */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
-          {/* Chat Mode Toggle */}
-          <div className="flex justify-center gap-4 mb-8">
+        {/* Global Mode Switcher */}
+        <div className="flex justify-center items-center py-5 border-b border-[#ffffff0a] bg-[#0a0a0f]/80 backdrop-blur-xl sticky top-0 z-20">
+          <div className="flex gap-8">
             <button 
               onClick={() => setChatMode("SQL")}
-              className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 border ${chatMode === "SQL" ? 'bg-[#3b82f6]/10 text-[#3b82f6] border-[#3b82f6]/40 shadow-[0_0_15px_rgba(59,130,246,0.15)]' : 'bg-[#13141c] text-[#9ea3b0] border-[#ffffff14] hover:bg-[#1c1d29] hover:text-[#f0f0f5]'}`}
+              className={`px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 border ${chatMode === "SQL" ? 'bg-[#3b82f6]/15 text-[#3b82f6] border-[#3b82f6]/50 shadow-[0_0_25px_rgba(59,130,246,0.35)]' : 'bg-transparent text-[#6b7280] border-transparent hover:bg-[#1c1d29] hover:text-[#f0f0f5]'}`}
             >
               SQL Analyst
             </button>
             <button 
               onClick={() => setChatMode("RAG")}
-              className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 border ${chatMode === "RAG" ? 'bg-[#10b981]/10 text-[#10b981] border-[#10b981]/40 shadow-[0_0_15px_rgba(16,185,129,0.15)]' : 'bg-[#13141c] text-[#9ea3b0] border-[#ffffff14] hover:bg-[#1c1d29] hover:text-[#f0f0f5]'}`}
+              className={`px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 border ${chatMode === "RAG" ? 'bg-[#10b981]/15 text-[#10b981] border-[#10b981]/50 shadow-[0_0_25px_rgba(16,185,129,0.35)]' : 'bg-transparent text-[#6b7280] border-transparent hover:bg-[#1c1d29] hover:text-[#f0f0f5]'}`}
             >
               RAG Knowledge Base
             </button>
           </div>
+        </div>
+
+        {/* Chat History */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-6">
 
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in`}>
