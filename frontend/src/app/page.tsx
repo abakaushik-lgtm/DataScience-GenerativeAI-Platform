@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
-import { LayoutDashboard, Loader2, Send, Upload, BookOpen, Activity, Database, FileText, Cpu, TrendingUp } from "lucide-react";
+import { LayoutDashboard, Loader2, Send, Upload, BookOpen, Activity, Database, FileText, Cpu, TrendingUp, Paperclip } from "lucide-react";
 import ReactECharts from "echarts-for-react";
 
 interface Message {
@@ -305,8 +305,8 @@ export default function Home() {
         </div>
 
         {/* Input Area */}
-        <div className="p-6 max-w-4xl mx-auto w-full">
-          <div className="relative bg-[#1c1d29] border border-[#ffffff14] rounded-2xl shadow-xl focus-within:border-[#6366f1] focus-within:ring-1 focus-within:ring-[#6366f1]/50 transition-all">
+        <div className="p-6 max-w-4xl mx-auto w-full relative z-30">
+          <div className="relative bg-[#13141c] border border-[#ffffff33] rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] focus-within:border-[#6366f1] focus-within:shadow-[0_0_30px_rgba(99,102,241,0.2)] transition-all duration-300">
             <textarea
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -318,24 +318,29 @@ export default function Home() {
               }}
               placeholder="Ask AntiGravity anything..."
               rows={3}
-              className="w-full bg-transparent p-4 text-[#f0f0f5] placeholder-[#6b7280] resize-none focus:outline-none custom-scrollbar"
+              className="w-full bg-transparent p-5 text-[15px] text-[#f0f0f5] placeholder-[#6b7280] resize-none focus:outline-none custom-scrollbar"
             />
-            <div className="flex justify-between items-center p-3 border-t border-[#ffffff0a]">
-              <div className="text-xs text-[#6b7280] ml-2">
-                 Press <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> to send, <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Shift + Enter</kbd> for new line
+            <div className="flex justify-between items-center p-3 border-t border-[#ffffff1a] bg-[#1c1d29]/50 rounded-b-2xl">
+              <div className="flex items-center gap-4 ml-2">
+                <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#2a2b36] hover:bg-[#3b82f6]/10 text-[#9ea3b0] hover:text-[#3b82f6] rounded-lg transition-all border border-[#ffffff14] hover:border-[#3b82f6]/30">
+                  <Paperclip size={14} /> Upload
+                </button>
+                <div className="text-xs text-[#6b7280] hidden md:block">
+                   Press <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> to send, <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Shift + Enter</kbd> for new line
+                </div>
               </div>
               <button
                 onClick={handleSendMessage}
                 disabled={loading || !query.trim()}
                 className={`p-2.5 rounded-xl flex items-center justify-center transition-all ${
-                  query.trim() ? (chatMode === "SQL" ? 'bg-[#3b82f6] hover:bg-[#2563eb] shadow-md' : 'bg-[#10b981] hover:bg-[#059669] shadow-md') : 'bg-[#2a2b36] text-[#6b7280]'
+                  query.trim() ? (chatMode === "SQL" ? 'bg-[#3b82f6] hover:bg-[#2563eb] shadow-[0_4px_15px_rgba(59,130,246,0.4)]' : 'bg-[#10b981] hover:bg-[#059669] shadow-[0_4px_15px_rgba(16,185,129,0.4)]') : 'bg-[#2a2b36] text-[#6b7280]'
                 }`}
               >
                 {loading ? <Loader2 size={18} className="animate-spin text-white" /> : <Send size={18} className={query.trim() ? "text-white" : ""} />}
               </button>
             </div>
           </div>
-          <div className="text-center text-xs text-[#6b7280] mt-4">
+          <div className="text-center text-[11px] text-[#6b7280] mt-4 font-medium tracking-wide">
             AntiGravity AI Analyst can make mistakes. Verify critical business insights.
           </div>
         </div>
