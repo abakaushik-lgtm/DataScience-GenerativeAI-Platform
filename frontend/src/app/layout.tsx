@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AntiGravity | Data Science Platform",
+  title: "Data Science Platform",
   description: "AI-powered analytics and data science platform",
 };
 

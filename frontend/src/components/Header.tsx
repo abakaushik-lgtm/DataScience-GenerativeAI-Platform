@@ -11,7 +11,7 @@ export default function Header() {
     if (pathname === "/dashboard") return "Executive Dashboard";
     if (pathname === "/advanced-ml") return "Advanced ML Studio";
     if (pathname === "/settings") return "Settings";
-    return "AntiGravity Platform";
+    return "AI Data Platform";
   };
 
   return (

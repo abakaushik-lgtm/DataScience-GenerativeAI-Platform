@@ -118,7 +118,7 @@ export default function InsightsDashboard() {
       a.href = url;
       
       const extensions: any = { "PDF": ".pdf", "DOCX": ".docx", "PPTX": ".pptx" };
-      a.download = `AntiGravity_${reportType.replace(' ', '_')}_${new Date().toISOString().split('T')[0]}${extensions[formatType]}`;
+      a.download = `Report_${reportType.replace(' ', '_')}_${new Date().toISOString().split('T')[0]}${extensions[formatType]}`;
       
       document.body.appendChild(a);
       a.click();

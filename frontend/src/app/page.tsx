@@ -102,7 +102,7 @@ export default function Home() {
         {/* Header */}
         <header className="h-24 border-b border-[#ffffff14] flex items-center px-10 bg-[#0a0a0f] z-30 relative">
           <div className="flex flex-col justify-center">
-            <span className="text-[40px] font-black tracking-tighter text-white leading-none">AntiGravity</span>
+            <span className="text-[40px] font-black tracking-tighter text-white leading-none">AI Platform</span>
             <span className="text-[10px] text-[#3b82f6] font-extrabold tracking-[0.3em] uppercase mt-2">Enterprise AI Analytics Platform</span>
           </div>
           <div className="mx-10 h-12 w-px bg-[#ffffff14]"></div>
@@ -192,7 +192,7 @@ export default function Home() {
               <div className="w-16 h-16 bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] rounded-2xl flex items-center justify-center shadow-[0_4px_20px_rgba(99,102,241,0.4)] mb-2 mt-4">
                 <Activity size={32} className="text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-[#f0f0f5] mb-2">Welcome to AntiGravity</h1>
+              <h1 className="text-3xl font-bold text-[#f0f0f5] mb-2">Welcome to AI Platform</h1>
               <p className="text-[#9ea3b0] text-center max-w-lg mb-8 leading-relaxed">
                 Your AI-powered Data Analyst. Ask questions about your structured <strong className="text-[#f0f0f5] font-semibold">Databases</strong> and <strong className="text-[#f0f0f5] font-semibold">CSV files</strong>, or query unstructured <strong className="text-[#f0f0f5] font-semibold">PDF documents</strong> and <strong className="text-[#f0f0f5] font-semibold">Business metrics</strong>.
               </p>
@@ -310,7 +310,7 @@ export default function Home() {
                   handleSendMessage();
                 }
               }}
-              placeholder="Ask AntiGravity anything..."
+              placeholder="Ask AI Analyst anything..."
               rows={3}
               className="w-full bg-transparent p-5 text-[15px] text-[#f0f0f5] placeholder-[#6b7280] resize-none focus:outline-none custom-scrollbar"
             />
@@ -335,7 +335,7 @@ export default function Home() {
             </div>
           </div>
           <div className="text-center text-[11px] text-[#6b7280] mt-4 font-medium tracking-wide">
-            AntiGravity AI Analyst can make mistakes. Verify critical business insights.
+            AI Analyst can make mistakes. Verify critical business insights.
           </div>
         </div>
       </div>
