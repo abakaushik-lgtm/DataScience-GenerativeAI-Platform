@@ -14,6 +14,18 @@
 
 ---
 
+## 🎥 Demo
+
+**Live Demo: [Coming Soon]**
+
+The hosted platform is currently being provisioned. Once deployed, the interactive demo will showcase:
+- 🧠 **AI Data Analyst** (Natural Language to SQL)
+- 📈 **Forecasting Engine** (Time-Series Prediction)
+- ⚙️ **AutoML Studio** (Low-code Model Training)
+- 📚 **RAG Knowledge Assistant** (Semantic Document Search)
+
+---
+
 ## 🚀 Introduction
 
 **AntiGravity** is an enterprise-grade AI Data Science platform that bridges the gap between complex data infrastructure and non-technical business users. 
