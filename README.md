@@ -4,11 +4,10 @@
   <h1>AntiGravity</h1>
   <p><b>The Autonomous AI-Powered Data Science & Analytics Operating System</b></p>
   
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
-  [![Next.js](https://img.shields.io/badge/Next.js-black?style=flat&logo=next.js)](https://nextjs.org/)
-  [![LangGraph](https://img.shields.io/badge/LangGraph-🦜🕸️-green)](https://python.langchain.com/docs/langgraph)
-  [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
+  ![Python](https://img.shields.io/badge/Python-3.11-blue)
+  ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+  ![Next.js](https://img.shields.io/badge/Next.js-Frontend-black)
+  ![License](https://img.shields.io/badge/License-MIT-yellow)
 
   <i>Empowering organizations to converse with their data, automate machine learning, and extract deep business insights using natural language.</i>
 </div>
