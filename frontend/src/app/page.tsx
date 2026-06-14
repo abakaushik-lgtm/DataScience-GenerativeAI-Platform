@@ -99,12 +99,12 @@ export default function Home() {
     <div className="flex flex-col relative h-full">
         {/* Header */}
         <header className="h-16 border-b border-[#ffffff14] flex items-center px-6 glass-panel rounded-none">
-          <div className="flex flex-col">
-            <span className="font-bold text-[15px] leading-tight text-[#f0f0f5]">AntiGravity</span>
-            <span className="text-[11px] text-[#9ea3b0] tracking-wider uppercase">AI Analytics Platform</span>
+          <div className="flex flex-col justify-center">
+            <span className="text-xl font-bold tracking-tight text-[#f0f0f5]">AntiGravity</span>
+            <span className="text-[10px] text-[#3b82f6] font-semibold tracking-widest uppercase">Enterprise AI Analytics Platform</span>
           </div>
-          <div className="mx-4 h-8 w-px bg-[#ffffff14]"></div>
-          <h2 className="font-semibold text-[#f0f0f5]">AI Data Analyst</h2>
+          <div className="mx-5 h-8 w-px bg-[#ffffff14]"></div>
+          <h2 className="text-sm font-medium text-[#9ea3b0]">AI Data Analyst</h2>
           <div className="ml-auto flex items-center gap-2 text-sm text-[#10b981]">
             <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
             System Online
