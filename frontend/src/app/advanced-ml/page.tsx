@@ -71,7 +71,7 @@ export default function AdvancedMLDashboard() {
   };
 
   return (
-    <div className="bg-[#0a0a0f] text-[#f0f0f5] p-8">
+    <div className="bg-[#0a0a0f] text-[#f0f0f5] p-8 custom-scrollbar" style={{ height: '100%', overflowY: 'auto' }}>
       
       {/* Navigation Tabs */}
       <div className="flex gap-4 mb-8">

@@ -1,8 +1,6 @@
 import os
 from typing import List, Dict, Any
 import logging
-from langchain_core.documents import Document
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 class RAGService:
     def __init__(self):

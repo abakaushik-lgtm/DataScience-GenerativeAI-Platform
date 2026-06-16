@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Databases and Local Databases
+*.db
+antigravity_fallback.db
+
+# Logs
+*.log
+lt.log
+
+# Next.js
+.next/
+node_modules/
+out/
+
+# Vercel
+.vercel/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

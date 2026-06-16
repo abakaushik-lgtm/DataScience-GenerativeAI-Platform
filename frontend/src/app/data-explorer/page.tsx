@@ -43,7 +43,7 @@ const DATASETS = [
       { name: "status", type: "string", icon: <Type size={14} /> }
     ],
     data: [
-      { user_id: 1042, email: "j.doe@example.com", signup_date: "2022-01-14", status: "active" },
+      { user_id: 1042, email: "a.kaushik@example.com", signup_date: "2022-01-14", status: "active" },
       { user_id: 1043, email: "m.smith@example.com", signup_date: "2022-01-15", status: "churned" },
       { user_id: 1044, email: "a.lee@example.com", signup_date: "2022-01-15", status: "active" },
       { user_id: 1045, email: "k.jones@example.com", signup_date: "2022-01-16", status: "active" },

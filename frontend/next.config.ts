@@ -1,11 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://127.0.0.1:8000/api/:path*', // Proxy to local FastAPI backend
+        destination: `${process.env.BACKEND_URL || 'http://127.0.0.1:8000'}/api/:path*`, // Proxy to FastAPI backend
       },
     ];
   },

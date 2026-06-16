@@ -82,7 +82,7 @@ class InsightEngineService:
              return {"status": "No numeric data found to aggregate over time"}
              
         df_ts = df.set_index(time_col)
-        monthly_trend = df_ts[numeric_cols].resample('M').sum()
+        monthly_trend = df_ts[numeric_cols].resample('ME').sum()
         
         # Calculate percentage change for the most prominent numeric column
         target_col = numeric_cols[0]

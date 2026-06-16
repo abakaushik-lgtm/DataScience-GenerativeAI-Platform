@@ -11,11 +11,19 @@ POSTGRES_DB = os.getenv("POSTGRES_DB", "antigravity_db")
 
 SQLALCHEMY_DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
+use_sqlite = False
 try:
-    engine = create_engine(SQLALCHEMY_DATABASE_URL)
+    # Use a short connect timeout so we don't hang if Postgres is down
+    engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"connect_timeout": 2})
+    # Force a connection check to verify if Postgres is actually up
+    with engine.connect() as conn:
+        pass
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 except Exception as e:
-    # Fallback to in-memory SQLite if Postgres isn't running (useful for CI/CD or local test without docker)
+    use_sqlite = True
+
+if use_sqlite:
+    # Fallback to local SQLite if Postgres isn't running
     engine = create_engine("sqlite:///./antigravity_fallback.db", connect_args={"check_same_thread": False})
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

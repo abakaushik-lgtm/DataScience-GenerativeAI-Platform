@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
 :root {
   /* Core Colors - Obsidian Theme */
@@ -132,4 +131,9 @@ a {
 
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Hide Next.js Dev Indicator completely */
+nextjs-portal, #nextjs-toast, [data-nextjs-toast], #__next-build-watcher {
+  display: none !important;
 }

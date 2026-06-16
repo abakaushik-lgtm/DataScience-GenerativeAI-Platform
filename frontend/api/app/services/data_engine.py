@@ -1,11 +1,13 @@
 import pandas as pd
 import logging
+import os
+import shutil
 from typing import Any, Dict
 
 class DataEngineService:
     def __init__(self):
         self.polars = None
-        self.spark = None
+        self._spark = None
         
         # Try importing polars
         try:
@@ -14,17 +16,24 @@ class DataEngineService:
         except ImportError:
             logging.warning("Polars not installed. Using Pandas fallback.")
 
-        # Try initializing PySpark
-        try:
-            from pyspark.sql import SparkSession
-            # This will fail gracefully if JVM/Hadoop winutils is missing on Windows
-            self.spark = SparkSession.builder \
-                .appName("AntiGravity_PySpark") \
-                .config("spark.driver.host", "localhost") \
-                .getOrCreate()
-        except Exception as e:
-            logging.warning(f"PySpark JVM initialization failed: {e}. PySpark engine disabled.")
-            self.spark = None
+    @property
+    def spark(self):
+        if self._spark is None:
+            # Check if java is available to prevent PySpark from hanging or launching shell errors
+            if not os.getenv("JAVA_HOME") and not shutil.which("java"):
+                logging.warning("Java/JVM is not installed or not in PATH. PySpark engine disabled.")
+                return None
+            
+            try:
+                from pyspark.sql import SparkSession
+                self._spark = SparkSession.builder \
+                    .appName("AntiGravity_PySpark") \
+                    .config("spark.driver.host", "localhost") \
+                    .getOrCreate()
+            except Exception as e:
+                logging.warning(f"PySpark JVM initialization failed: {e}. PySpark engine disabled.")
+                self._spark = None
+        return self._spark
 
     def load_csv(self, file_path: str, engine: str = "pandas") -> Dict[str, Any]:
         """

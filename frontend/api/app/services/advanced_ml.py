@@ -1,6 +1,6 @@
 import logging
-import random
-import math
+import numpy as np
+import pandas as pd
 from typing import Dict, Any, List
 
 class AdvancedMLService:
@@ -10,37 +10,37 @@ class AdvancedMLService:
     def run_ab_test(self, control_conversions: int, control_size: int, 
                     treatment_conversions: int, treatment_size: int) -> Dict[str, Any]:
         """
-        Runs an automated A/B test (mocked for Vercel deployment)
+        Runs an automated A/B test (Two-proportion z-test)
         """
-        p_c = control_conversions / max(1, control_size)
-        p_t = treatment_conversions / max(1, treatment_size)
+        from scipy.stats import norm
         
-        # Mock calculation using basic math to replace scipy.stats.norm
-        uplift = (p_t - p_c) / p_c if p_c > 0 else 0
-        p_value = random.uniform(0.01, 0.15) if uplift > 0 else random.uniform(0.15, 0.99)
+        p_c = control_conversions / control_size
+        p_t = treatment_conversions / treatment_size
+        p_pool = (control_conversions + treatment_conversions) / (control_size + treatment_size)
+        
+        se = np.sqrt(p_pool * (1 - p_pool) * (1/control_size + 1/treatment_size))
+        z_stat = (p_t - p_c) / se
+        p_value = 2 * (1 - norm.cdf(abs(z_stat)))
         
         return {
-            "control_conversion_rate": p_c,
-            "treatment_conversion_rate": p_t,
-            "uplift": uplift,
-            "p_value": p_value,
-            "significant": p_value < 0.05
+            "control_conversion_rate": float(p_c),
+            "treatment_conversion_rate": float(p_t),
+            "uplift": float((p_t - p_c) / p_c),
+            "p_value": float(p_value),
+            "significant": bool(p_value < 0.05)
         }
 
     def detect_anomalies(self, data: List[float]) -> Dict[str, Any]:
         """
-        Uses mock Anomaly Detection (replaces sklearn IsolationForest)
+        Uses Isolation Forest for fraud/anomaly detection in 1D data.
         """
-        if not data:
-            return {"total_records": 0, "anomaly_count": 0, "anomalies": []}
-            
-        mean = sum(data) / len(data)
-        variance = sum((x - mean) ** 2 for x in data) / len(data)
-        std_dev = math.sqrt(variance)
+        from sklearn.ensemble import IsolationForest
         
-        # Flag anything > 2 std devs as anomaly
-        anomalies = [x for x in data if abs(x - mean) > 2 * std_dev]
+        df = pd.DataFrame(data, columns=["value"])
+        model = IsolationForest(contamination=0.05, random_state=42)
+        preds = model.fit_predict(df[["value"]])
         
+        anomalies = df[preds == -1]["value"].tolist()
         return {
             "total_records": len(data),
             "anomaly_count": len(anomalies),
@@ -49,29 +49,56 @@ class AdvancedMLService:
 
     def explain_model_shap(self, model_type: str, X: List[List[float]]) -> Dict[str, Any]:
         """
-        Mocks SHAP value extraction (replaces shap and sklearn)
+        Mocks SHAP value extraction for a pre-trained model on tabular data.
+        (In a real scenario, you'd pass the actual trained model instance)
         """
-        if not X or not X[0]:
-            return {"feature_importance": []}
-            
-        num_features = len(X[0])
-        # Generate random importance that sums to ~1
-        importances = [random.uniform(0.1, 0.9) for _ in range(num_features)]
-        total = sum(importances)
-        normalized = [i / total for i in importances]
+        import shap
+        from sklearn.ensemble import RandomForestRegressor
         
+        # Mocking a model and SHAP calculation
+        X_df = pd.DataFrame(X)
+        y = X_df.iloc[:, 0] * 2 + np.random.normal(0, 1, len(X))
+        
+        model = RandomForestRegressor(n_estimators=10, max_depth=3)
+        model.fit(X_df, y)
+        
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(X_df)
+        
+        # Return average absolute SHAP values as feature importance
+        mean_shap = np.abs(shap_values).mean(axis=0).tolist()
         return {
-            "feature_importance": normalized
+            "feature_importance": mean_shap
         }
 
     def run_causal_inference(self, data: List[Dict[str, float]], treatment: str, outcome: str) -> Dict[str, Any]:
         """
-        Mocks DoWhy causal inference.
+        Runs DoWhy causal inference.
         """
-        return {
-            "treatment": treatment,
-            "outcome": outcome,
-            "causal_estimate": random.uniform(0.1, 5.0)
-        }
+        try:
+            import dowhy
+            from dowhy import CausalModel
+            
+            df = pd.DataFrame(data)
+            
+            # Simplified mock causal graph assumption
+            model = CausalModel(
+                data=df,
+                treatment=treatment,
+                outcome=outcome,
+                common_causes=[col for col in df.columns if col not in [treatment, outcome]]
+            )
+            
+            identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
+            estimate = model.estimate_effect(identified_estimand, method_name="backdoor.linear_regression")
+            
+            return {
+                "treatment": treatment,
+                "outcome": outcome,
+                "causal_estimate": float(estimate.value)
+            }
+        except Exception as e:
+            logging.error(f"DoWhy Causal Inference Error: {e}")
+            return {"error": str(e)}
 
 advanced_ml_service = AdvancedMLService()

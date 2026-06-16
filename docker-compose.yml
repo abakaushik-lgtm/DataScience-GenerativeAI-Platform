@@ -31,6 +31,38 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
+  api:
+    build:
+      context: ./frontend/api
+      dockerfile: Dockerfile
+    container_name: antigravity_api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_URL=postgresql://antigravity:antigravity_password@db:5432/antigravity_db
+      - REDIS_URL=redis://redis:6379/0
+      - QDRANT_URL=http://qdrant:6333
+      # Note: OPENAI_API_KEY should be passed in via a .env file or environment
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - db
+      - redis
+      - qdrant
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: antigravity_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=http://api:8000
+    depends_on:
+      - api
+
 volumes:
   postgres_data:
   qdrant_data:

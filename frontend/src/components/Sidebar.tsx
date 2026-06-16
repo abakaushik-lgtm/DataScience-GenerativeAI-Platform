@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { 
   LayoutDashboard, 
   MessageSquare, 
@@ -17,7 +17,11 @@ import {
 import { useState } from "react";
 
 export default function Sidebar() {
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentView = searchParams.get("view") || "chat";
+  const currentMode = searchParams.get("mode") || "SQL";
+  const currentTab = searchParams.get("tab") || "";
+  
   const [kbFile, setKbFile] = useState<File | null>(null);
   const [uploadingKb, setUploadingKb] = useState(false);
 
@@ -32,51 +36,65 @@ export default function Sidebar() {
   };
 
   const navLinks = [
-    { name: "AI Analyst", href: "/", icon: <MessageSquare size={18} /> },
-    { name: "RAG Knowledge", href: "/?mode=rag", icon: <BookOpen size={18} /> },
-    { name: "Executive Dashboard", href: "/dashboard", icon: <LayoutDashboard size={18} /> },
-    { name: "Forecasting", href: "/dashboard#forecasting", icon: <TrendingUp size={18} /> },
-    { name: "AutoML Engine", href: "/dashboard#automl", icon: <Cpu size={18} /> },
-    { name: "Advanced ML Studio", href: "/advanced-ml", icon: <Activity size={18} /> },
-    { name: "Data Explorer Hub", href: "/data-explorer", icon: <Database size={18} /> },
-    { name: "AI Reports", href: "/dashboard#reports", icon: <FileText size={18} /> },
-    { name: "Settings", href: "/settings", icon: <Settings size={18} /> },
+    { name: "Aura Analyst", href: "/?view=chat&mode=SQL", view: "chat", mode: "SQL", icon: <MessageSquare size={18} /> },
+    { name: "RAG Knowledge", href: "/?view=chat&mode=RAG", view: "chat", mode: "RAG", icon: <BookOpen size={18} /> },
+    { name: "Executive Dashboard", href: "/?view=dashboard", view: "dashboard", tab: "", icon: <LayoutDashboard size={18} /> },
+    { name: "Forecasting", href: "/?view=dashboard&tab=forecasting", view: "dashboard", tab: "forecasting", icon: <TrendingUp size={18} /> },
+    { name: "AutoML Engine", href: "/?view=dashboard&tab=automl", view: "dashboard", tab: "automl", icon: <Cpu size={18} /> },
+    { name: "Advanced ML Studio", href: "/?view=advanced-ml", view: "advanced-ml", icon: <Activity size={18} /> },
+    { name: "Data Explorer Hub", href: "/?view=data-explorer", view: "data-explorer", icon: <Database size={18} /> },
+    { name: "AI Reports", href: "/?view=dashboard&tab=reports", view: "dashboard", tab: "reports", icon: <FileText size={18} /> },
+    { name: "Settings", href: "/?view=settings", view: "settings", icon: <Settings size={18} /> },
   ];
 
   return (
     <aside className="w-64 border-r border-[#ffffff14] bg-[#13141c] p-6 hidden md:flex flex-col h-full flex-shrink-0 z-10 shadow-xl">
-      <h1 className="text-2xl font-bold gradient-text mb-8 tracking-wider">AI Platform</h1>
+      <h1 className="text-2xl font-bold gradient-text mb-8 tracking-wider">Aura Analyst</h1>
       
       <nav className="space-y-2 flex-1 overflow-y-auto pr-2 custom-scrollbar">
-        <h2 className="text-xs uppercase text-[#6b7280] font-semibold tracking-widest mb-4 mt-2">Platform</h2>
-        
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-          return (
-            <Link 
-              key={link.name} 
-              href={link.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium ${
-                isActive 
-                  ? "bg-[#6366f1]/10 text-[#6366f1] shadow-[inset_2px_0_0_#6366f1]" 
-                  : "text-[#9ea3b0] hover:bg-[#1c1d29] hover:text-[#f0f0f5]"
-              }`}
-            >
-              {link.icon}
-              {link.name}
-            </Link>
-          );
-        })}
+         <h2 className="text-xs uppercase text-[#6b7280] font-semibold tracking-widest mb-4 mt-2">Platform</h2>
+         
+         {navLinks.map((link) => {
+           let isActive = false;
+           if (link.view === currentView) {
+             if (link.view === "chat") {
+               isActive = link.mode === currentMode;
+             } else if (link.view === "dashboard") {
+               if (link.tab) {
+                 isActive = link.tab === currentTab;
+               } else {
+                 isActive = currentTab === "" || currentTab === "insights";
+               }
+             } else {
+               isActive = true;
+             }
+           }
+           
+           return (
+             <Link 
+               key={link.name} 
+               href={link.href}
+               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium ${
+                 isActive 
+                   ? "bg-[#6366f1]/10 text-[#6366f1] shadow-[inset_2px_0_0_#6366f1]" 
+                   : "text-[#9ea3b0] hover:bg-[#1c1d29] hover:text-[#f0f0f5]"
+               }`}
+             >
+               {link.icon}
+               {link.name}
+             </Link>
+           );
+         })}
       </nav>
 
       {/* Data Sources Config */}
       <div className="mt-4 pt-4 border-t border-[#ffffff14]">
         <h2 className="text-xs uppercase text-[#6b7280] font-semibold tracking-widest mb-3">Data Sources</h2>
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm text-[#f0f0f5] bg-[#1c1d29] p-2 rounded-md border border-[#ffffff14]">
+          <div className="flex items-center gap-2 text-sm text-[#f0f0f5] bg-[#1c1d29] rounded-md border border-[#ffffff14]" style={{ padding: '8px 12px' }}>
             <Database size={14} className="text-[#3b82f6]" /> Prod_PostgreSQL
           </div>
-          <div className="flex items-center gap-2 text-sm text-[#f0f0f5] bg-[#1c1d29] p-2 rounded-md border border-[#ffffff14]">
+          <div className="flex items-center gap-2 text-sm text-[#f0f0f5] bg-[#1c1d29] rounded-md border border-[#ffffff14]" style={{ padding: '8px 12px' }}>
             <Database size={14} className="text-[#10b981]" /> Sales_Data.csv
           </div>
         </div>

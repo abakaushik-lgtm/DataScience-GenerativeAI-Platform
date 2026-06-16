@@ -22,7 +22,7 @@ async def generate_forecast(request: ForecastRequest):
         # Fetch the data
         if request.db_type == "mock":
             import numpy as np
-            dates = pd.date_range('2022-01-01', periods=100, freq='M')
+            dates = pd.date_range('2022-01-01', periods=100, freq='ME')
             df = pd.DataFrame({
                 request.time_col: dates,
                 request.target_col: np.linspace(100, 200, 100) + np.sin(np.linspace(0, 10, 100))*20 + np.random.normal(0, 5, 100)

@@ -1,343 +1,44 @@
 "use client";
 
-import { useState, useRef } from "react";
-import Link from "next/link";
-import { LayoutDashboard, Loader2, Send, Upload, BookOpen, Activity, Database, FileText, Cpu, TrendingUp, Paperclip } from "lucide-react";
-import ReactECharts from "echarts-for-react";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { Loader2 } from "lucide-react";
+import AuraAnalystChat from "@/components/AuraAnalystChat";
+import InsightsDashboard from "./dashboard/page";
+import AdvancedMLDashboard from "./advanced-ml/page";
+import DataExplorer from "./data-explorer/page";
+import SettingsView from "@/components/SettingsView";
 
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-  sql?: string;
-  data?: any[];
-  chart_config?: any;
+function MainAppContent() {
+  const searchParams = useSearchParams();
+  const view = searchParams.get("view") || "chat";
+
+  switch (view) {
+    case "dashboard":
+      return <InsightsDashboard />;
+    case "advanced-ml":
+      return <AdvancedMLDashboard />;
+    case "data-explorer":
+      return <DataExplorer />;
+    case "settings":
+      return <SettingsView />;
+    case "chat":
+    default:
+      return <AuraAnalystChat />;
+  }
 }
 
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [chatMode, setChatMode] = useState<"SQL" | "RAG">("SQL");
-  
-  const [kbFile, setKbFile] = useState<File | null>(null);
-  const [uploadingKb, setUploadingKb] = useState(false);
-
-  const handleKbUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const selectedFile = e.target.files[0];
-      setKbFile(selectedFile);
-      setUploadingKb(true);
-      
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-        const response = await fetch(`${apiUrl}/api/rag/upload`, {
-          method: "POST",
-          body: formData,
-        });
-        const data = await response.json();
-        setMessages(prev => [...prev, { 
-          role: "assistant", 
-          content: `Knowledge Base Updated: Successfully ingested ${selectedFile.name} (${data.chunks_added || 'Mock'} chunks). Switch to RAG Knowledge Base mode to chat with it.` 
-        }]);
-      } catch (error) {
-        console.error("Knowledge Base upload failed", error);
-      } finally {
-        setUploadingKb(false);
-      }
-    }
-  };
-
-  const handleSendMessage = async (textOverride?: string | React.MouseEvent | React.KeyboardEvent) => {
-    // If textOverride is a string, use it, otherwise use query state
-    const textToSend = typeof textOverride === 'string' ? textOverride : query;
-    if (!textToSend.trim()) return;
-
-    const userMessage: Message = { role: "user", content: textToSend };
-    setMessages((prev) => [...prev, userMessage]);
-    setQuery("");
-    setLoading(true);
-
-    try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-      const endpoint = chatMode === "SQL" ? `${apiUrl}/api/analyst/query` : `${apiUrl}/api/rag/query`;
-      const body: any = { question: userMessage.content };
-      
-      if (chatMode === "SQL") {
-        body.schema_info = "CREATE TABLE sales (id INT, product VARCHAR, amount FLOAT, region VARCHAR, date DATE);";
-        body.db_type = "mock";
-      }
-
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      const data = await response.json();
-      
-      const assistantMessage: Message = {
-        role: "assistant",
-        content: data.explanation || "Request processed.",
-        sql: data.sql_query,
-        data: data.results,
-        chart_config: data.chart_config,
-      };
-
-      setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error) {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Sorry, I encountered an error connecting to the backend." },
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="flex flex-col relative h-full">
-        {/* Header */}
-        <header className="h-24 border-b border-[#ffffff14] flex items-center px-10 bg-[#0a0a0f] z-30 relative">
-          <div className="flex flex-col justify-center">
-            <span className="text-[40px] font-black tracking-tighter text-white leading-none">AI Platform</span>
-            <span className="text-[10px] text-[#3b82f6] font-extrabold tracking-[0.3em] uppercase mt-2">Enterprise AI Analytics Platform</span>
-          </div>
-          <div className="mx-10 h-12 w-px bg-[#ffffff14]"></div>
-          <h2 className="text-[11px] font-medium text-[#4b5563] tracking-[0.2em] uppercase">AI Data Analyst</h2>
-          <div className="ml-auto flex items-center gap-2 text-[10px] font-bold tracking-wider text-[#10b981] bg-[#10b981]/10 px-4 py-2 rounded-full border border-[#10b981]/20 uppercase">
-            <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-            System Online
-          </div>
-        </header>
-
-        {/* Chat History */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 relative">
-          
-          {/* Floating Pill Toggle */}
-          <div className="flex justify-center mb-8 sticky top-4 z-20">
-            <div className="bg-[#1c1d29]/90 backdrop-blur-md p-1.5 rounded-full inline-flex border border-[#ffffff14] shadow-xl">
-              <button 
-                onClick={() => setChatMode("SQL")}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${chatMode === "SQL" ? 'bg-[#3b82f6] text-white shadow-md' : 'text-[#9ea3b0] hover:text-[#f0f0f5] hover:bg-[#ffffff0a]'}`}
-              >
-                SQL Analyst
-              </button>
-              <button 
-                onClick={() => setChatMode("RAG")}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${chatMode === "RAG" ? 'bg-[#10b981] text-white shadow-md' : 'text-[#9ea3b0] hover:text-[#f0f0f5] hover:bg-[#ffffff0a]'}`}
-              >
-                RAG Knowledge Base
-              </button>
-            </div>
-          </div>
-
-          {messages.map((msg, idx) => (
-            <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in`}>
-              <div
-                className={`max-w-[80%] rounded-2xl p-5 ${
-                  msg.role === "user"
-                    ? "bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white shadow-[0_4px_15px_rgba(99,102,241,0.3)]"
-                    : "glass-panel"
-                }`}
-              >
-                <div className="font-medium text-[15px] leading-relaxed whitespace-pre-wrap">{msg.content}</div>
-                
-                {msg.sql && (
-                  <div className="mt-4 bg-[#0a0a0f] p-3 rounded-md border border-[#ffffff14]">
-                    <span className="text-xs text-[#9ea3b0] uppercase tracking-wider block mb-2">Generated SQL</span>
-                    <code className="text-[#10b981] font-mono text-sm block overflow-x-auto whitespace-pre">
-                      {msg.sql}
-                    </code>
-                  </div>
-                )}
-                
-                {msg.chart_config && (
-                  <div className="mt-4 bg-[#13141c] p-4 rounded-md border border-[#ffffff14] h-[300px] w-full">
-                    <ReactECharts option={msg.chart_config} style={{ height: '100%', width: '100%' }} />
-                  </div>
-                )}
-                
-                {msg.data && msg.data.length > 0 && (
-                  <div className="mt-4 overflow-x-auto border border-[#ffffff14] rounded-md custom-scrollbar">
-                    <table className="w-full text-sm whitespace-nowrap table-fixed">
-                      <thead className="text-xs uppercase bg-[#050505] text-[#a1a1aa]">
-                        <tr>
-                          {Object.keys(msg.data[0]).map((key) => (
-                            <th key={key} className={`px-4 py-3 font-semibold tracking-wider border-b border-[#ffffff14] ${typeof msg.data![0][key] === "number" ? "text-right" : "text-left"}`}>{key}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[#ffffff0a]">
-                        {msg.data.slice(0, 5).map((row, i) => (
-                          <tr key={i} className={`${i % 2 === 0 ? "bg-[#121212]" : "bg-[#0a0a0a]"} hover:bg-[#2563eb]/10 transition-colors`}>
-                            {Object.values(row).map((val: any, j) => (
-                              <td key={j} className={`px-4 py-2 ${typeof val === "number" ? "text-right text-[#10b981] font-mono" : "text-left text-[#ffffff]"}`}>{String(val)}</td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-
-          {/* Empty State / Dashboard Home */}
-          {messages.length === 0 && !loading && (
-            <div className="mt-8 animate-fade-in space-y-8 max-w-5xl mx-auto w-full flex flex-col items-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] rounded-2xl flex items-center justify-center shadow-[0_4px_20px_rgba(99,102,241,0.4)] mb-2 mt-4">
-                <Activity size={32} className="text-white" />
-              </div>
-              <h1 className="text-3xl font-bold text-[#f0f0f5] mb-2">Welcome to AI Platform</h1>
-              <p className="text-[#9ea3b0] text-center max-w-lg mb-8 leading-relaxed">
-                Your AI-powered Data Analyst. Ask questions about your structured <strong className="text-[#f0f0f5] font-semibold">Databases</strong> and <strong className="text-[#f0f0f5] font-semibold">CSV files</strong>, or query unstructured <strong className="text-[#f0f0f5] font-semibold">PDF documents</strong> and <strong className="text-[#f0f0f5] font-semibold">Business metrics</strong>.
-              </p>
-
-              {/* Hero Stats */}
-              <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto w-full mb-10">
-                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#3b82f6]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
-                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">12</div>
-                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Total Data</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
-                    <TrendingUp size={12} /> +3 week
-                  </div>
-                </div>
-                
-                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#10b981]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
-                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">84</div>
-                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Reports Gen</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
-                    <TrendingUp size={12} /> +12 week
-                  </div>
-                </div>
-                
-                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#8b5cf6]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
-                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">17</div>
-                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Models</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
-                    <TrendingUp size={12} /> +2 week
-                  </div>
-                </div>
-                
-                <div className="bg-[#1c1d29]/80 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-[#ffffff14] hover:border-[#f59e0b]/40 hover:bg-[#1c1d29] transition-all shadow-lg">
-                  <div className="text-4xl font-bold text-[#f0f0f5] mb-1">320</div>
-                  <div className="text-xs font-semibold text-[#9ea3b0] uppercase tracking-wider mb-3">Knowledge</div>
-                  <div className="text-[11px] text-[#10b981] font-medium bg-[#10b981]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#10b981]/20">
-                    <TrendingUp size={12} /> +45 month
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Prompts & Recent */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-8 rounded-3xl shadow-xl ring-1 ring-white/5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all">
-                  <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                    <Send size={18} className="text-[#3b82f6]" /> Suggested Actions
-                  </h3>
-                  <div className="flex flex-wrap gap-3 mt-4">
-                    {[
-                      { label: "Revenue Analysis", query: "Why did revenue decrease last quarter?" },
-                      { label: "Forecast Q3", query: "Forecast next quarter sales based on seasonality" },
-                      { label: "Customer Churn", query: "Find the most profitable customer segments and churn risks" },
-                      { label: "Document Summary", query: "Summarize the key findings from the uploaded documents" }
-                    ].map((item, i) => (
-                      <button 
-                        key={i} 
-                        onClick={() => handleSendMessage(item.query)}
-                        className="px-5 py-2.5 rounded-full bg-[#1c1d29] border border-[#ffffff2a] hover:border-[#3b82f6] hover:bg-[#3b82f6]/10 transition-all duration-200 text-sm font-medium text-[#f0f0f5] shadow-sm flex items-center gap-2"
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-b from-[#1c1d29] to-[#13141c] p-8 rounded-3xl shadow-xl ring-1 ring-white/5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all">
-                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    <Activity size={18} className="text-[#10b981]" /> Active Datasets
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#1c1d29] border border-[#ffffff14]">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-[#10b981]/10 rounded-md text-[#10b981]"><LayoutDashboard size={16}/></div>
-                        <div>
-                          <div className="text-sm font-medium">sales_data_q3.csv</div>
-                          <div className="text-xs text-[#6b7280]">12,450 rows • 1.2 MB</div>
-                        </div>
-                      </div>
-                      <div className="text-xs text-[#10b981] px-2 py-1 bg-[#10b981]/10 rounded-full">Active</div>
-                    </div>
-                    <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#1c1d29] border border-[#ffffff14]">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-[#f59e0b]/10 rounded-md text-[#f59e0b]"><BookOpen size={16}/></div>
-                        <div>
-                          <div className="text-sm font-medium">Q2_Earnings_Call.pdf</div>
-                          <div className="text-xs text-[#6b7280]">Vectorized • 345 chunks</div>
-                        </div>
-                      </div>
-                      <div className="text-xs text-[#f59e0b] px-2 py-1 bg-[#f59e0b]/10 rounded-full">Indexed</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {loading && (
-            <div className="flex justify-start animate-fade-in">
-              <div className="glass-panel rounded-2xl p-5 flex items-center gap-2 text-[#9ea3b0]">
-                <div className="w-2 h-2 bg-[#6366f1] rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-[#6366f1] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                <div className="w-2 h-2 bg-[#6366f1] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Input Area */}
-        <div className="p-6 max-w-4xl mx-auto w-full relative z-30">
-          <div className="relative bg-[#13141c] border border-[#ffffff33] rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] focus-within:border-[#6366f1] focus-within:shadow-[0_0_30px_rgba(99,102,241,0.2)] transition-all duration-300">
-            <textarea
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSendMessage();
-                }
-              }}
-              placeholder="Ask AI Analyst anything..."
-              rows={3}
-              className="w-full bg-transparent p-5 text-[15px] text-[#f0f0f5] placeholder-[#6b7280] resize-none focus:outline-none custom-scrollbar"
-            />
-            <div className="flex justify-between items-center p-3 border-t border-[#ffffff1a] bg-[#1c1d29]/50 rounded-b-2xl">
-              <div className="flex items-center gap-4 ml-2">
-                <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#2a2b36] hover:bg-[#3b82f6]/10 text-[#9ea3b0] hover:text-[#3b82f6] rounded-lg transition-all border border-[#ffffff14] hover:border-[#3b82f6]/30">
-                  <Paperclip size={14} /> Upload
-                </button>
-                <div className="text-xs text-[#6b7280] hidden md:block">
-                   Press <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> to send, <kbd className="bg-[#2a2b36] border border-[#ffffff14] px-1.5 py-0.5 rounded text-[10px]">Shift + Enter</kbd> for new line
-                </div>
-              </div>
-              <button
-                onClick={handleSendMessage}
-                disabled={loading || !query.trim()}
-                className={`p-2.5 rounded-xl flex items-center justify-center transition-all ${
-                  query.trim() ? (chatMode === "SQL" ? 'bg-[#3b82f6] hover:bg-[#2563eb] shadow-[0_4px_15px_rgba(59,130,246,0.4)]' : 'bg-[#10b981] hover:bg-[#059669] shadow-[0_4px_15px_rgba(16,185,129,0.4)]') : 'bg-[#2a2b36] text-[#6b7280]'
-                }`}
-              >
-                {loading ? <Loader2 size={18} className="animate-spin text-white" /> : <Send size={18} className={query.trim() ? "text-white" : ""} />}
-              </button>
-            </div>
-          </div>
-          <div className="text-center text-[11px] text-[#6b7280] mt-4 font-medium tracking-wide">
-            AI Analyst can make mistakes. Verify critical business insights.
-          </div>
+    <Suspense fallback={
+      <div className="flex h-full items-center justify-center bg-[#0a0a0f] text-[#f0f0f5]" style={{ height: '100%' }}>
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="animate-spin text-[#6366f1]" size={32} />
+          <p className="text-sm text-[#9ea3b0]">Loading Aura Analyst...</p>
         </div>
       </div>
+    }>
+      <MainAppContent />
+    </Suspense>
   );
 }

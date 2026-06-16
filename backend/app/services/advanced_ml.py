@@ -23,11 +23,11 @@ class AdvancedMLService:
         p_value = 2 * (1 - norm.cdf(abs(z_stat)))
         
         return {
-            "control_conversion_rate": p_c,
-            "treatment_conversion_rate": p_t,
-            "uplift": (p_t - p_c) / p_c,
-            "p_value": p_value,
-            "significant": p_value < 0.05
+            "control_conversion_rate": float(p_c),
+            "treatment_conversion_rate": float(p_t),
+            "uplift": float((p_t - p_c) / p_c),
+            "p_value": float(p_value),
+            "significant": bool(p_value < 0.05)
         }
 
     def detect_anomalies(self, data: List[float]) -> Dict[str, Any]:
