@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: AuraAnlayst
+    name: AuraAnalyst
     env: docker
     rootDir: backend
     plan: free
