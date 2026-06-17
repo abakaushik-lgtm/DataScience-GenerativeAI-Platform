@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: antigravity-api
+    name: AuraAnlayst
     env: docker
     rootDir: backend
     plan: free
