@@ -229,6 +229,7 @@ function InsightsDashboardContent() {
         display: 'flex', 
         flexDirection: 'column', 
         padding: '24px',
+        paddingLeft: '64px',
         boxSizing: 'border-box' 
       }}
     >

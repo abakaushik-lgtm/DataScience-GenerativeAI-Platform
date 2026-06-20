@@ -49,7 +49,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 border-r border-[#ffffff14] bg-[#13141c] p-6 hidden md:flex flex-col h-full flex-shrink-0 z-10 shadow-xl">
-      <h1 className="text-2xl font-bold gradient-text mb-8 tracking-wider">Aura Analyst</h1>
+      <h1 className="text-2xl font-bold gradient-text tracking-wider" style={{ marginTop: '24px', marginBottom: '48px' }}>Aura Analyst</h1>
       
       <nav className="space-y-2 flex-1 overflow-y-auto pr-2 custom-scrollbar">
          <h2 className="text-xs uppercase text-[#6b7280] font-semibold tracking-widest mb-4 mt-2">Platform</h2>
